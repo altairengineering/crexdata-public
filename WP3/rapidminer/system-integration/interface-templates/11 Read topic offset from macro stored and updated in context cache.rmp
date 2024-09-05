@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="set_macro" compatibility="10.1.003" expanded="true" height="82" name="Set Macro" width="90" x="112" y="34">
+        <parameter key="macro" value="row_last_read_macro"/>
+        <parameter key="value" value="0"/>
+      </operator>
+      <operator activated="true" class="concurrency:loop" compatibility="10.1.003" expanded="true" height="82" name="Loop" width="90" x="246" y="34">
+        <parameter key="number_of_iterations" value="3"/>
+        <parameter key="iteration_macro" value="iteration"/>
+        <parameter key="reuse_results" value="false"/>
+        <parameter key="enable_parallel_execution" value="false"/>
+        <process expanded="true">
+          <operator activated="true" class="branch" compatibility="10.1.003" expanded="true" height="82" name="Branch" width="90" x="179" y="34">
+            <parameter key="condition_type" value="expression"/>
+            <parameter key="expression" value="%{row_last_read_macro} == 0"/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KafkaCon-290823" width="90" x="45" y="34">
+                <parameter key="repository_entry" value="/Connections/KafkaCon-290823"/>
+              </operator>
+              <operator activated="true" class="kafka_connector:read_kafka_topic" compatibility="0.4.000" expanded="true" height="82" name="Read Kafka Topic" width="90" x="179" y="34">
+                <parameter key="kafka_topic" value="poly-test"/>
+                <parameter key="offset_strategy" value="earliest"/>
+                <parameter key="retrieval_time_out" value="5"/>
+                <parameter key="get_all" value="false"/>
+                <parameter key="number_of_records" value="5"/>
+                <parameter key="collection_strategy" value="number"/>
+                <parameter key="counter" value="20"/>
+                <parameter key="time_out" value="120"/>
+                <parameter key="polling_time_out" value="10"/>
+                <parameter key="api_timeout" value="10"/>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.1.003" expanded="true" height="68" name="Extract Macro" width="90" x="313" y="34">
+                <parameter key="macro" value="row_last_read_macro"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="connection_url"/>
+                <parameter key="example_index" value="%{example-index}"/>
+                <list key="additional_macros"/>
+                <description align="center" color="transparent" colored="false" width="126">Extract number of examples and overwrite offset macro</description>
+              </operator>
+              <operator activated="true" breakpoints="after" class="annotate" compatibility="10.1.003" expanded="true" height="68" name="Annotate (2)" width="90" x="447" y="34">
+                <list key="annotations">
+                  <parameter key="RowCountMacro" value="%{row_last_read_macro}"/>
+                </list>
+                <parameter key="duplicate_annotations" value="overwrite"/>
+              </operator>
+              <operator activated="true" class="print_to_console" compatibility="10.1.003" expanded="true" height="82" name="Print to Console" width="90" x="581" y="34">
+                <parameter key="log_value" value="Iteraction Macro = %{iteration} -&gt; Storing Row Count Macro = %{row_last_read_macro}"/>
+              </operator>
+              <operator activated="true" class="remember" compatibility="10.1.003" expanded="true" height="68" name="Remember" width="90" x="715" y="34">
+                <parameter key="name" value="row_last_read_macro"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="store_which" value="1"/>
+                <parameter key="remove_from_process" value="true"/>
+              </operator>
+              <connect from_op="Retrieve KafkaCon-290823" from_port="output" to_op="Read Kafka Topic" to_port="connection"/>
+              <connect from_op="Read Kafka Topic" from_port="output data" to_op="Extract Macro" to_port="example set"/>
+              <connect from_op="Extract Macro" from_port="example set" to_op="Annotate (2)" to_port="input"/>
+              <connect from_op="Annotate (2)" from_port="output" to_op="Print to Console" to_port="through 1"/>
+              <connect from_op="Print to Console" from_port="through 1" to_op="Remember" to_port="store"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="recall" compatibility="10.1.003" expanded="true" height="68" name="Recall (2)" width="90" x="45" y="136">
+                <parameter key="name" value="row_last_read_macro"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">Do not remove from cache here</description>
+              </operator>
+              <operator activated="false" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KafkaCon-290823 (2)" width="90" x="45" y="391">
+                <parameter key="repository_entry" value="/Connections/KafkaCon-290823"/>
+              </operator>
+              <operator activated="false" class="kafka_connector:read_kafka_topic" compatibility="0.4.000" expanded="true" height="82" name="Read Kafka Topic (2)" width="90" x="179" y="391">
+                <parameter key="kafka_topic" value="poly-test"/>
+                <parameter key="offset_strategy" value="earliest"/>
+                <parameter key="retrieval_time_out" value="5"/>
+                <parameter key="get_all" value="false"/>
+                <parameter key="number_of_records" value="5"/>
+                <parameter key="collection_strategy" value="number"/>
+                <parameter key="counter" value="20"/>
+                <parameter key="time_out" value="120"/>
+                <parameter key="polling_time_out" value="10"/>
+                <parameter key="api_timeout" value="10"/>
+              </operator>
+              <operator activated="false" class="extract_macro" compatibility="10.1.003" expanded="true" height="68" name="Extract Macro (3)" width="90" x="313" y="391">
+                <parameter key="macro" value="row_last_read_macro"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="connection_url"/>
+                <parameter key="example_index" value="%{example-index}"/>
+                <list key="additional_macros"/>
+                <description align="center" color="transparent" colored="false" width="126">Extract number of examples and overwrite offset macro</description>
+              </operator>
+              <operator activated="true" class="extract_macro_from_annotation" compatibility="10.1.003" expanded="true" height="68" name="Extract Macro from Annotation (2)" width="90" x="179" y="136">
+                <parameter key="extract_all" value="false"/>
+                <parameter key="macro" value="row_last_read_macro"/>
+                <parameter key="annotation" value="RowCountMacro"/>
+                <parameter key="fail_on_missing" value="true"/>
+              </operator>
+              <operator activated="false" class="blending:generate_columns" compatibility="10.1.003" expanded="true" height="82" name="Generate Attributes" width="90" x="447" y="340">
+                <list key="function_descriptions">
+                  <parameter key="NewRowCount" value="eval(%{row_last_read_macro}+1)"/>
+                </list>
+                <parameter key="keep_all_columns" value="true"/>
+                <description align="center" color="transparent" colored="false" width="126">increment macro and overwrite this new exampleset in cache</description>
+              </operator>
+              <operator activated="true" breakpoints="after" class="annotate" compatibility="10.1.003" expanded="true" height="68" name="Annotate (3)" width="90" x="313" y="136">
+                <list key="annotations">
+                  <parameter key="RowCountMacro" value="eval(%{row_last_read_macro} + 1)"/>
+                </list>
+                <parameter key="duplicate_annotations" value="overwrite"/>
+                <description align="center" color="transparent" colored="false" width="126">+1 to be replaced by no. of examples read</description>
+              </operator>
+              <operator activated="true" class="remember" compatibility="10.1.003" expanded="true" height="68" name="Remember (2)" width="90" x="447" y="136">
+                <parameter key="name" value="row_last_read_macro"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="store_which" value="1"/>
+                <parameter key="remove_from_process" value="true"/>
+              </operator>
+              <operator activated="true" class="print_to_console" compatibility="10.1.003" expanded="true" height="103" name="Print to Console (3)" width="90" x="648" y="85">
+                <parameter key="log_value" value="Iteration Macro = %{iteration} -&gt; Row Count Macro is non-zero, Recalling from cache"/>
+              </operator>
+              <connect from_port="condition" to_op="Print to Console (3)" to_port="through 1"/>
+              <connect from_op="Recall (2)" from_port="result" to_op="Extract Macro from Annotation (2)" to_port="object"/>
+              <connect from_op="Retrieve KafkaCon-290823 (2)" from_port="output" to_op="Read Kafka Topic (2)" to_port="connection"/>
+              <connect from_op="Read Kafka Topic (2)" from_port="output data" to_op="Extract Macro (3)" to_port="example set"/>
+              <connect from_op="Extract Macro from Annotation (2)" from_port="object" to_op="Annotate (3)" to_port="input"/>
+              <connect from_op="Annotate (3)" from_port="output" to_op="Remember (2)" to_port="store"/>
+              <connect from_op="Remember (2)" from_port="stored" to_op="Print to Console (3)" to_port="through 2"/>
+              <connect from_op="Print to Console (3)" from_port="through 2" to_port="input 1"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+              <description align="center" color="blue" colored="true" height="50" resized="true" width="674" x="46" y="10">Here we need to fetch previous row count and add the no. of rows read now into the previous row count and then store that into the cache as last step.</description>
+            </process>
+          </operator>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="source_input 2" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
+          <portSpacing port="sink_output 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="false" class="annotate" compatibility="10.1.003" expanded="true" height="68" name="Annotate" width="90" x="45" y="340">
+        <list key="annotations">
+          <parameter key="Last_Offset_Annotation" value="%{row_last_read_macro}"/>
+        </list>
+        <parameter key="duplicate_annotations" value="overwrite"/>
+      </operator>
+      <operator activated="false" class="extract_macro_from_annotation" compatibility="10.1.003" expanded="true" height="68" name="Extract Macro from Annotation" width="90" x="179" y="340">
+        <parameter key="extract_all" value="false"/>
+        <parameter key="macro" value="offset_macro"/>
+        <parameter key="annotation" value="Last_Offset_Annotation"/>
+        <parameter key="fail_on_missing" value="true"/>
+      </operator>
+      <operator activated="false" class="print_to_console" compatibility="10.1.003" expanded="true" height="82" name="Print to Console (2)" width="90" x="313" y="340">
+        <parameter key="log_value" value="offset_macro = %{offset_macro}"/>
+      </operator>
+      <operator activated="true" class="recall" compatibility="10.1.003" expanded="true" height="68" name="Recall (3)" width="90" x="380" y="85">
+        <parameter key="name" value="row_last_read_macro"/>
+        <parameter key="io_object" value="ExampleSet"/>
+        <parameter key="remove_from_store" value="true"/>
+        <description align="center" color="transparent" colored="false" width="126">Removing from cache in the last step</description>
+      </operator>
+      <connect from_op="Set Macro" from_port="through 1" to_op="Loop" to_port="input 1"/>
+      <connect from_op="Loop" from_port="output 1" to_port="result 1"/>
+      <connect from_op="Extract Macro from Annotation" from_port="object" to_op="Print to Console (2)" to_port="through 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

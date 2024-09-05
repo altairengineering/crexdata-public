@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve Polynomial" width="90" x="45" y="136">
+        <parameter key="repository_entry" value="//Samples/data/Polynomial"/>
+      </operator>
+      <operator activated="true" class="split_data" compatibility="10.1.003" expanded="true" height="103" name="Split Data" width="90" x="179" y="136">
+        <enumeration key="partitions">
+          <parameter key="ratio" value="0.8"/>
+          <parameter key="ratio" value="0.2"/>
+        </enumeration>
+        <parameter key="sampling_type" value="stratified sampling"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="concurrency:parallel_random_forest" compatibility="10.1.003" expanded="true" height="103" name="Random Forest" origin="GENERATED_TUTORIAL" width="90" x="313" y="136">
+        <parameter key="number_of_trees" value="100"/>
+        <parameter key="criterion" value="least_square"/>
+        <parameter key="maximal_depth" value="10"/>
+        <parameter key="apply_pruning" value="false"/>
+        <parameter key="confidence" value="0.1"/>
+        <parameter key="apply_prepruning" value="false"/>
+        <parameter key="minimal_gain" value="0.01"/>
+        <parameter key="minimal_leaf_size" value="2"/>
+        <parameter key="minimal_size_for_split" value="4"/>
+        <parameter key="number_of_prepruning_alternatives" value="3"/>
+        <parameter key="random_splits" value="false"/>
+        <parameter key="guess_subset_ratio" value="true"/>
+        <parameter key="subset_ratio" value="0.2"/>
+        <parameter key="voting_strategy" value="confidence vote"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="10.1.003" expanded="true" height="68" name="Store" width="90" x="447" y="136">
+        <parameter key="repository_entry" value="../data/Polynomial-RFModel"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KofkaCon-290823" width="90" x="45" y="289">
+        <parameter key="repository_entry" value="/Connections/KofkaCon-290823"/>
+      </operator>
+      <operator activated="true" breakpoints="after" class="kafka_connector:write_kafka_topic" compatibility="0.3.002" expanded="true" height="82" name="Write Kafka Topic" width="90" x="313" y="289">
+        <parameter key="kafka_topic" value="poly-test"/>
+        <parameter key="attribute_separator" value=";"/>
+        <parameter key="bulk_sending" value="false"/>
+        <parameter key="message_interval" value="1"/>
+        <parameter key="message_format" value="JSON"/>
+        <parameter key="api_timeout" value="5000"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="10.1.003" expanded="true" height="82" name="Apply Model" width="90" x="581" y="238">
+        <list key="application_parameters"/>
+      </operator>
+      <connect from_op="Retrieve Polynomial" from_port="output" to_op="Split Data" to_port="example set"/>
+      <connect from_op="Split Data" from_port="partition 1" to_op="Random Forest" to_port="training set"/>
+      <connect from_op="Split Data" from_port="partition 2" to_op="Write Kafka Topic" to_port="input"/>
+      <connect from_op="Random Forest" from_port="model" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_op="Apply Model" to_port="model"/>
+      <connect from_op="Retrieve KofkaCon-290823" from_port="output" to_op="Write Kafka Topic" to_port="connection"/>
+      <connect from_op="Write Kafka Topic" from_port="throughput" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Apply Model" from_port="labelled data" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KofkaCon-290823" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="/Connections/KofkaCon-290823"/>
+      </operator>
+      <operator activated="false" breakpoints="after" class="text:data_to_json" compatibility="9.4.000" expanded="true" height="68" name="Data To JSON" width="90" x="112" y="391">
+        <parameter key="ignore_arrays" value="false"/>
+        <parameter key="generate_array" value="false"/>
+        <parameter key="include_missing_values" value="false"/>
+      </operator>
+      <operator activated="false" breakpoints="after" class="text:documents_to_data" compatibility="9.4.000" expanded="true" height="82" name="Documents to Data" width="90" x="246" y="391">
+        <parameter key="text_attribute" value="Data"/>
+        <parameter key="add_meta_information" value="true"/>
+        <parameter key="datamanagement" value="double_sparse_array"/>
+        <parameter key="data_management" value="auto"/>
+        <parameter key="use_processed_text" value="false"/>
+        <description align="center" color="transparent" colored="false" width="126">This adds a key and inserts whole JSON as its value, which is a complex JSON and not suitable for Streaming Extension operators</description>
+      </operator>
+      <operator activated="false" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve Polynomial" width="90" x="112" y="289">
+        <parameter key="repository_entry" value="//Samples/data/Polynomial"/>
+      </operator>
+      <operator activated="false" class="numerical_to_polynominal" compatibility="10.1.003" expanded="true" height="82" name="Numerical to Polynominal" width="90" x="246" y="289">
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="numeric"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="real"/>
+        <parameter key="block_type" value="value_series"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_series_end"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve Titanic" width="90" x="112" y="136">
+        <parameter key="repository_entry" value="//Samples/data/Titanic"/>
+      </operator>
+      <operator activated="true" breakpoints="after" class="filter_example_range" compatibility="10.1.003" expanded="true" height="82" name="Filter Example Range" width="90" x="246" y="136">
+        <parameter key="first_example" value="1"/>
+        <parameter key="last_example" value="1"/>
+        <parameter key="invert_filter" value="false"/>
+      </operator>
+      <operator activated="true" class="kafka_connector:write_kafka_topic" compatibility="0.3.002" expanded="true" height="82" name="Write Kafka Topic" width="90" x="514" y="34">
+        <parameter key="kafka_topic" value="mytopik1"/>
+        <parameter key="attribute_separator" value=";"/>
+        <parameter key="bulk_sending" value="false"/>
+        <parameter key="message_interval" value="1"/>
+        <parameter key="message_format" value="JSON"/>
+        <parameter key="api_timeout" value="5000"/>
+      </operator>
+      <connect from_op="Retrieve KofkaCon-290823" from_port="output" to_op="Write Kafka Topic" to_port="connection"/>
+      <connect from_op="Data To JSON" from_port="documents" to_op="Documents to Data" to_port="documents 1"/>
+      <connect from_op="Retrieve Polynomial" from_port="output" to_op="Numerical to Polynominal" to_port="example set input"/>
+      <connect from_op="Retrieve Titanic" from_port="output" to_op="Filter Example Range" to_port="example set input"/>
+      <connect from_op="Filter Example Range" from_port="example set output" to_op="Write Kafka Topic" to_port="input"/>
+      <connect from_op="Write Kafka Topic" from_port="throughput" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

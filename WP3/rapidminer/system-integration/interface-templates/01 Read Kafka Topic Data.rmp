@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KofkaCon-290823" width="90" x="179" y="85">
+        <parameter key="repository_entry" value="/Connections/KofkaCon-290823"/>
+      </operator>
+      <operator activated="true" class="kafka_connector:read_kafka_topic" compatibility="0.3.002" expanded="true" height="82" name="Read Kafka Topic" width="90" x="380" y="85">
+        <parameter key="kafka_topic" value="mytopik1"/>
+        <parameter key="offset_strategy" value="earliest"/>
+        <parameter key="retrieval_time_out" value="5"/>
+        <parameter key="get_all" value="true"/>
+        <parameter key="number_of_records" value="100"/>
+        <parameter key="collection_strategy" value="duration"/>
+        <parameter key="counter" value="100"/>
+        <parameter key="time_out" value="120"/>
+        <parameter key="polling_time_out" value="5"/>
+        <parameter key="api_timeout" value="10"/>
+      </operator>
+      <connect from_op="Retrieve KofkaCon-290823" from_port="output" to_op="Read Kafka Topic" to_port="connection"/>
+      <connect from_op="Read Kafka Topic" from_port="output data" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

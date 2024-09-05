@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process" origin="GENERATED_TUTORIAL">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve Flink1.9-Java11-270923" width="90" x="179" y="34">
+        <parameter key="repository_entry" value="//CREXDATA-Repo/Connections/Flink1.9-Java11-270923"/>
+      </operator>
+      <operator activated="true" class="streaming:streaming_nest" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Streaming Nest" origin="GENERATED_TUTORIAL" width="90" x="380" y="34">
+        <parameter key="job_name" value="sde-wf"/>
+        <process expanded="true">
+          <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Kafka Connection1" width="90" x="112" y="34">
+            <parameter key="repository_entry" value="/Connections/KofkaCon-290823"/>
+          </operator>
+          <operator activated="true" class="multiply" compatibility="10.1.003" expanded="true" height="103" name="Multiply" origin="GENERATED_TUTORIAL" width="90" x="246" y="34"/>
+          <operator activated="true" class="streaming:kafka_source" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Source" origin="GENERATED_TUTORIAL" width="90" x="514" y="289">
+            <parameter key="kafka_topic" value="poly-data"/>
+            <parameter key="start_from_earliest" value="true"/>
+            <description align="center" color="transparent" colored="false" width="126">Receive input events from the input kafka topic</description>
+          </operator>
+          <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Kafka Connection2" width="90" x="447" y="85">
+            <parameter key="repository_entry" value="/Connections/KofkaCon-290823"/>
+            <description align="center" color="transparent" colored="false" width="126">Connection to Kafka cluster for SDE related communication</description>
+          </operator>
+          <operator activated="true" class="streaming:sde" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Synopsis Data Engine" origin="GENERATED_TUTORIAL" width="90" x="715" y="85">
+            <parameter key="synopsis_type" value="count min"/>
+            <parameter key="data_set_key" value="Polynomial_Data"/>
+            <parameter key="synopsis_params" value="a1,label,Queryable,0.0002,0.99,4"/>
+            <parameter key="synopsis_parallelism" value="2"/>
+            <parameter key="u_id" value="100"/>
+            <parameter key="stream_id_key" value="a1"/>
+            <parameter key="estimate_type" value="Continuous"/>
+            <parameter key="estimate_frequency" value="1"/>
+            <parameter key="request_topic" value="sde-request"/>
+            <parameter key="data_topic" value="sde-data"/>
+            <parameter key="output_topic" value="sde-output"/>
+            <description align="center" color="transparent" colored="false" width="126">Invoke SDE service with user-configured Request and pass Input Data. Response is received from SDE and sinked to another Topic</description>
+          </operator>
+          <operator activated="true" class="streaming:kafka_sink" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Sink" origin="GENERATED_TUTORIAL" width="90" x="849" y="34">
+            <parameter key="kafka_topic" value="mytopik3"/>
+            <description align="center" color="transparent" colored="false" width="126">SDE output is sinked in kafka topic</description>
+          </operator>
+          <connect from_op="Kafka Connection1" from_port="output" to_op="Multiply" to_port="input"/>
+          <connect from_op="Multiply" from_port="output 1" to_op="Kafka Sink" to_port="connection"/>
+          <connect from_op="Multiply" from_port="output 2" to_op="Kafka Source" to_port="connection"/>
+          <connect from_op="Kafka Source" from_port="output stream" to_op="Synopsis Data Engine" to_port="input stream"/>
+          <connect from_op="Kafka Connection2" from_port="output" to_op="Synopsis Data Engine" to_port="connection"/>
+          <connect from_op="Synopsis Data Engine" from_port="output stream" to_op="Kafka Sink" to_port="input stream"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">Deploy the designed Streaming Analytic process on the provided Flink Cluster.&lt;br&gt;</description>
+      </operator>
+      <connect from_op="Retrieve Flink1.9-Java11-270923" from_port="output" to_op="Streaming Nest" to_port="connection"/>
+      <connect from_op="Streaming Nest" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

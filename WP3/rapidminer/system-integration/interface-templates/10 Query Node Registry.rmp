@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" breakpoints="after" class="subprocess" compatibility="10.1.003" expanded="true" height="82" name="Query Node Registry" width="90" x="246" y="85">
+        <process expanded="true">
+          <operator activated="true" class="web:crud_post" compatibility="9.7.001" expanded="true" height="68" name="POST (REST) (2)" origin="GENERATED_TUTORIAL" width="90" x="45" y="34">
+            <parameter key="request_url" value="http://10.20.10.156:22380/webapi/DEFAULT/api/v1/services/queryregistry/query-registry"/>
+            <parameter key="request_body_type" value="json"/>
+            <parameter key="request_json" value="{&#10; &quot;data&quot;: [&#10;  {}&#10; ]&#10;}"/>
+            <list key="request_form">
+              <parameter key="client_id" value="isgat-pkce-dev"/>
+              <parameter key="grant_type" value="password"/>
+              <parameter key="username" value="eyaqub"/>
+              <parameter key="password" value="sd*f24!35Cz"/>
+            </list>
+            <list key="request_headers">
+              <parameter key="Content-type" value="application/json"/>
+            </list>
+            <parameter key="response_body_type" value="json"/>
+            <parameter key="json_content-type" value="application/json; charset=utf-8"/>
+            <parameter key="binary_content-type" value="application/octet-stream"/>
+            <parameter key="inject_connection_secret" value="false"/>
+            <parameter key="fail_on_endpoint_error" value="true"/>
+            <description align="center" color="green" colored="true" width="126">POST request to query NodeRegistry service</description>
+          </operator>
+          <operator activated="true" class="text:json_to_data" compatibility="10.0.000" expanded="true" height="82" name="JSON To Data" width="90" x="179" y="34">
+            <parameter key="ignore_arrays" value="false"/>
+            <parameter key="limit_attributes" value="false"/>
+            <parameter key="skip_invalid_documents" value="true"/>
+            <parameter key="guess_data_types" value="true"/>
+            <parameter key="keep_missing_attributes" value="false"/>
+            <parameter key="missing_values_aliases" value=", null, NaN, missing"/>
+          </operator>
+          <operator activated="true" class="de_pivot" compatibility="10.1.003" expanded="true" height="82" name="De-Pivot" width="90" x="313" y="34">
+            <list key="attribute_name">
+              <parameter key="connection_url" value="data\[\d+\]\.connection_url"/>
+              <parameter key="last_active_timestamp" value="data\[\d+\]\.last_active_timestamp"/>
+            </list>
+            <parameter key="index_attribute" value="id"/>
+            <parameter key="create_nominal_index" value="false"/>
+            <parameter key="keep_missings" value="false"/>
+          </operator>
+          <operator activated="true" class="numerical_to_date" compatibility="10.1.003" expanded="true" height="82" name="Numerical to Date" width="90" x="447" y="34">
+            <parameter key="attribute_name" value="last_active_timestamp"/>
+            <parameter key="keep_old_attribute" value="true"/>
+            <parameter key="time_offset" value="0"/>
+          </operator>
+          <connect from_op="POST (REST) (2)" from_port="response" to_op="JSON To Data" to_port="documents 1"/>
+          <connect from_op="JSON To Data" from_port="example set" to_op="De-Pivot" to_port="example set input"/>
+          <connect from_op="De-Pivot" from_port="example set output" to_op="Numerical to Date" to_port="example set input"/>
+          <connect from_op="Numerical to Date" from_port="example set output" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">Query RTSA node registry for all available nodes</description>
+      </operator>
+      <operator activated="true" class="subprocess" compatibility="10.1.003" expanded="true" height="82" name="Federation NEST" width="90" x="447" y="85">
+        <process expanded="true">
+          <operator activated="false" class="filter_examples" compatibility="10.1.003" expanded="true" height="103" name="Filter Nodes" width="90" x="45" y="187">
+            <parameter key="parameter_expression" value=""/>
+            <parameter key="condition_class" value="custom_filters"/>
+            <parameter key="invert_filter" value="false"/>
+            <list key="filters_list">
+              <parameter key="filters_entry_key" value="cpu_core.gt.2"/>
+              <parameter key="filters_entry_key" value="memory_gb.ge.3"/>
+              <parameter key="filters_entry_key" value="disk_gb.ge.10"/>
+              <parameter key="filters_entry_key" value="network_data_rate_mbps.ge.10"/>
+              <parameter key="filters_entry_key" value="site.is_in.&quot;TU Crete&quot; , &quot;DRZ Dortmund&quot;"/>
+              <parameter key="filters_entry_key" value="node_supports_gpu.matches.&quot;yes&quot;"/>
+              <parameter key="filters_entry_key" value="node_gpu_type.equals.&quot;nVIDIA&quot;"/>
+              <parameter key="filters_entry_key" value="tensorflow_configured.matches.&quot;yes&quot;"/>
+              <parameter key="filters_entry_key" value="microprocessor.is_in.&quot;Intel&quot; , &quot;AMD&quot;"/>
+              <parameter key="filters_entry_key" value="cpu_architecture.contains.&quot;64-bit&quot;"/>
+            </list>
+            <parameter key="filters_logic_and" value="true"/>
+            <parameter key="filters_check_metadata" value="true"/>
+          </operator>
+          <operator activated="true" class="loop_examples" compatibility="10.1.003" expanded="true" height="82" name="Loop Examples" width="90" x="246" y="187">
+            <parameter key="iteration_macro" value="example-index"/>
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.1.003" expanded="true" height="68" name="Extract Macro (2)" width="90" x="112" y="85">
+                <parameter key="macro" value="server_url"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="connection_url"/>
+                <parameter key="example_index" value="%{example-index}"/>
+                <list key="additional_macros"/>
+                <description align="center" color="transparent" colored="false" width="126">Extract connection_url attribute of current example into macro</description>
+              </operator>
+              <operator activated="true" class="print_to_console" compatibility="10.1.003" expanded="true" height="82" name="Print to Console" width="90" x="246" y="85">
+                <parameter key="log_value" value="Deploying On: %{server_url}"/>
+              </operator>
+              <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve FreyaAIHub" width="90" x="447" y="289">
+                <parameter key="repository_entry" value="/Connections/FreyaAIHub"/>
+              </operator>
+              <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StandaloneRTSA" width="90" x="447" y="136">
+                <parameter key="repository_entry" value="/Connections/StandaloneRTSA"/>
+                <description align="center" color="transparent" colored="false" width="126">Connect with multiple RTSAs</description>
+              </operator>
+              <operator activated="true" class="admin:deploy_project_rtsa" compatibility="3.0.002" expanded="true" height="82" name="Deploy Workflow on Node" width="90" x="648" y="187">
+                <parameter key="deployment_name" value="auto-deployment"/>
+                <parameter key="project_name" value="sample-test"/>
+                <parameter key="deployment_location" value="/mystream"/>
+                <parameter key="git_reference" value="master"/>
+                <enumeration key="connections">
+                  <parameter key="connection_name" value="KafkaCon-150124"/>
+                </enumeration>
+                <parameter key="time_out" value="120"/>
+                <parameter key="continuous_execution" value="true"/>
+                <parameter key="sleep_time" value="0"/>
+                <description align="center" color="transparent" colored="false" width="126">Points to an actual Usecase Workflow on AI Hub, gets its Deployment Profile and Dispatches Deployment</description>
+              </operator>
+              <connect from_port="example set" to_op="Extract Macro (2)" to_port="example set"/>
+              <connect from_op="Extract Macro (2)" from_port="example set" to_op="Print to Console" to_port="through 1"/>
+              <connect from_op="Print to Console" from_port="through 1" to_port="example set"/>
+              <connect from_op="Retrieve FreyaAIHub" from_port="output" to_op="Deploy Workflow on Node" to_port="aihub_connection"/>
+              <connect from_op="Retrieve StandaloneRTSA" from_port="output" to_op="Deploy Workflow on Node" to_port="rtsa_connection"/>
+              <portSpacing port="source_example set" spacing="0"/>
+              <portSpacing port="sink_example set" spacing="0"/>
+              <portSpacing port="sink_output 1" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_port="in 1" to_op="Loop Examples" to_port="example set"/>
+          <connect from_op="Loop Examples" from_port="example set" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <description align="left" color="green" colored="true" height="119" resized="true" width="718" x="71" y="30">1) Currently, the &amp;quot;Deploy Project on RTSA&amp;quot; operator takes an RTSA connector object, but we can create a clone of this operator that takes in an ExampleSet (list containing information about selected RTSA nodes).&lt;br&gt;2) The Deploy operator could implicitly create connection to all selected nodes, download deployment profile of the project (which contains usecase level workflows) from AI Hub and also dispatching the deployment to the RTSA nodes.&lt;br&gt;3) All steps are automatic.</description>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">Download and Dispatch deployment on RTSA(s) nodes of choice</description>
+      </operator>
+      <connect from_op="Query Node Registry" from_port="out 1" to_op="Federation NEST" to_port="in 1"/>
+      <connect from_op="Federation NEST" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="green" colored="true" height="50" resized="true" width="707" x="82" y="10">Query Node Registry, filter out nodes of interest, download deployment and dispatch deployment to selected nodes</description>
+    </process>
+  </operator>
+</process>

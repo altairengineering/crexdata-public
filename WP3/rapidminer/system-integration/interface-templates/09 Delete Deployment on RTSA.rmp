@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="false" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StandaloneRTSA" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="//CREXDATA-Repo/Connections/StandaloneRTSA"/>
+        <description align="center" color="transparent" colored="false" width="126">Uses Parameter Injection to place IP:port hence wont work, use the other connector with hardcoded IP:port</description>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StandaloneRTSA-VPN-IP" width="90" x="112" y="289">
+        <parameter key="repository_entry" value="/Connections/StandaloneRTSA-VPN-IP"/>
+      </operator>
+      <operator activated="true" class="admin:delete_deployment_rtsa" compatibility="3.0.002" expanded="true" height="82" name="Delete Deployment (RTSA)" width="90" x="380" y="34">
+        <parameter key="deployment_name" value="auto-deployment"/>
+      </operator>
+      <connect from_op="Retrieve StandaloneRTSA-VPN-IP" from_port="output" to_op="Delete Deployment (RTSA)" to_port="rtsa_connection"/>
+      <connect from_op="Delete Deployment (RTSA)" from_port="exa" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

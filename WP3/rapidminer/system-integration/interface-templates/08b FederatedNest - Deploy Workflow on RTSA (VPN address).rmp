@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="subprocess" compatibility="10.1.003" expanded="true" height="82" name="Federated/Edge NEST" width="90" x="246" y="85">
+        <process expanded="true">
+          <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve FreyaAIHub" width="90" x="179" y="187">
+            <parameter key="repository_entry" value="//CREXDATA-Repo/Connections/FreyaAIHub"/>
+          </operator>
+          <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve StandaloneRTSA-VPN-IP" width="90" x="179" y="85">
+            <parameter key="repository_entry" value="/Connections/StandaloneRTSA-VPN-IP"/>
+          </operator>
+          <operator activated="true" class="admin:deploy_project_rtsa" compatibility="3.0.002" expanded="true" height="82" name="Deploy Project (RTSA)" width="90" x="380" y="85">
+            <parameter key="deployment_name" value="auto-deployment"/>
+            <parameter key="project_name" value="sample-test"/>
+            <parameter key="deployment_location" value="/mystream"/>
+            <parameter key="git_reference" value="master"/>
+            <enumeration key="connections">
+              <parameter key="connection_name" value="KafkaCon-150124"/>
+            </enumeration>
+            <parameter key="time_out" value="120"/>
+            <parameter key="continuous_execution" value="true"/>
+            <parameter key="sleep_time" value="0"/>
+          </operator>
+          <connect from_op="Retrieve FreyaAIHub" from_port="output" to_op="Deploy Project (RTSA)" to_port="aihub_connection"/>
+          <connect from_op="Retrieve StandaloneRTSA-VPN-IP" from_port="output" to_op="Deploy Project (RTSA)" to_port="rtsa_connection"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Federated/Edge NEST" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

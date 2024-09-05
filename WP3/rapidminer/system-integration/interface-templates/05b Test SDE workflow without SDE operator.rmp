@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.1.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.1.003" expanded="true" name="Process" origin="GENERATED_TUTORIAL">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve Flink1.9-Java11-270923" width="90" x="179" y="34">
+        <parameter key="repository_entry" value="/Connections/Flink1.9-Java11-270923"/>
+      </operator>
+      <operator activated="true" class="streaming:streaming_nest" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Streaming Nest" origin="GENERATED_TUTORIAL" width="90" x="380" y="34">
+        <parameter key="job_name" value="sde-wf2"/>
+        <process expanded="true">
+          <operator activated="false" class="utility:create_exampleset" compatibility="10.1.003" expanded="true" height="68" name="Create ExampleSet" width="90" x="45" y="595">
+            <parameter key="generator_type" value="attribute functions"/>
+            <parameter key="number_of_examples" value="1"/>
+            <parameter key="use_stepsize" value="false"/>
+            <list key="function_descriptions">
+              <parameter key="dataSetkey" value="&quot;Polynomial_Data1&quot;"/>
+              <parameter key="requestID" value="5"/>
+              <parameter key="synopsisID" value="1"/>
+              <parameter key="uuid" value="100"/>
+              <parameter key="streamID" value="&quot;a1&quot;"/>
+              <parameter key="param" value="&quot;a1,label,Queryable,0.0002,0.99,4&quot;"/>
+              <parameter key="noOfP" value="2"/>
+            </list>
+            <parameter key="add_id_attribute" value="false"/>
+            <list key="numeric_series_configuration"/>
+            <list key="date_series_configuration"/>
+            <list key="date_series_configuration (interval)"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="column_separator" value=","/>
+            <parameter key="parse_all_as_nominal" value="false"/>
+            <parameter key="decimal_point_character" value="."/>
+            <parameter key="trim_attribute_names" value="true"/>
+          </operator>
+          <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KafkaCon-290823" width="90" x="45" y="34">
+            <parameter key="repository_entry" value="/Connections/KafkaCon-290823"/>
+          </operator>
+          <operator activated="true" class="multiply" compatibility="10.1.003" expanded="true" height="82" name="Multiply" origin="GENERATED_TUTORIAL" width="90" x="246" y="34"/>
+          <operator activated="false" class="streaming:kafka_sink" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Sink (2)" origin="GENERATED_TUTORIAL" width="90" x="179" y="544">
+            <parameter key="kafka_topic" value="sde-request"/>
+            <description align="center" color="transparent" colored="false" width="126">Step1: Write to Kafka Request Topic</description>
+          </operator>
+          <operator activated="false" class="utility:create_exampleset" compatibility="10.1.003" expanded="true" height="68" name="Create ExampleSet (2)" width="90" x="313" y="697">
+            <parameter key="generator_type" value="attribute functions"/>
+            <parameter key="number_of_examples" value="1"/>
+            <parameter key="use_stepsize" value="false"/>
+            <list key="function_descriptions"/>
+            <parameter key="add_id_attribute" value="false"/>
+            <list key="numeric_series_configuration"/>
+            <list key="date_series_configuration"/>
+            <list key="date_series_configuration (interval)"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="column_separator" value=","/>
+            <parameter key="parse_all_as_nominal" value="false"/>
+            <parameter key="decimal_point_character" value="."/>
+            <parameter key="trim_attribute_names" value="true"/>
+          </operator>
+          <operator activated="false" class="streaming:kafka_sink" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Sink (3)" origin="GENERATED_TUTORIAL" width="90" x="447" y="646">
+            <parameter key="kafka_topic" value="sde-data"/>
+            <description align="center" color="transparent" colored="false" width="126">Step2: Write to Kafka Input Data Topic</description>
+          </operator>
+          <operator activated="true" class="streaming:kafka_source" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Source (2)" origin="GENERATED_TUTORIAL" width="90" x="648" y="595">
+            <parameter key="kafka_topic" value="sde-output"/>
+            <parameter key="start_from_earliest" value="true"/>
+            <description align="center" color="transparent" colored="false" width="126">Step3: Read from SDE output</description>
+          </operator>
+          <operator activated="false" class="streaming:kafka_source" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Source" origin="GENERATED_TUTORIAL" width="90" x="514" y="289">
+            <parameter key="kafka_topic" value="poly-data"/>
+            <parameter key="start_from_earliest" value="true"/>
+            <description align="center" color="transparent" colored="false" width="126">Receive input events from the input kafka topic</description>
+          </operator>
+          <operator activated="false" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KafkaCon-290823 (2)" width="90" x="514" y="85">
+            <parameter key="repository_entry" value="/Connections/KafkaCon-290823"/>
+          </operator>
+          <operator activated="false" class="streaming:sde" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Synopsis Data Engine" origin="GENERATED_TUTORIAL" width="90" x="715" y="85">
+            <parameter key="synopsis_type" value="count min"/>
+            <parameter key="data_set_key" value="Polynomial_Data1"/>
+            <parameter key="synopsis_params" value="a1,label,Queryable,0.0002,0.99,4"/>
+            <parameter key="synopsis_parallelism" value="2"/>
+            <parameter key="u_id" value="100"/>
+            <parameter key="stream_id_key" value="a1"/>
+            <parameter key="estimate_type" value="Continuous"/>
+            <parameter key="estimate_frequency" value="1"/>
+            <parameter key="request_topic" value="sde-request"/>
+            <parameter key="data_topic" value="sde-data"/>
+            <parameter key="output_topic" value="sde-output"/>
+            <description align="center" color="transparent" colored="false" width="126">Invoke SDE service with user-configured Request and pass Input Data. Response is received from SDE and sinked to another Topic</description>
+          </operator>
+          <operator activated="false" class="streaming:kafka_sink" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Kafka Sink" origin="GENERATED_TUTORIAL" width="90" x="849" y="34">
+            <parameter key="kafka_topic" value="mytopik1"/>
+            <description align="center" color="transparent" colored="false" width="126">SDE output is sinked in kafka topic</description>
+          </operator>
+          <connect from_op="Create ExampleSet" from_port="output" to_op="Kafka Sink (2)" to_port="input stream"/>
+          <connect from_op="Retrieve KafkaCon-290823" from_port="output" to_op="Multiply" to_port="input"/>
+          <connect from_op="Multiply" from_port="output 1" to_op="Kafka Source (2)" to_port="connection"/>
+          <connect from_op="Create ExampleSet (2)" from_port="output" to_op="Kafka Sink (3)" to_port="input stream"/>
+          <connect from_op="Kafka Source (2)" from_port="output stream" to_port="out 1"/>
+          <connect from_op="Kafka Source" from_port="output stream" to_op="Synopsis Data Engine" to_port="input stream"/>
+          <connect from_op="Retrieve KafkaCon-290823 (2)" from_port="output" to_op="Synopsis Data Engine" to_port="connection"/>
+          <connect from_op="Synopsis Data Engine" from_port="output stream" to_op="Kafka Sink" to_port="input stream"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <description align="center" color="green" colored="true" height="145" resized="true" width="267" x="14" y="698">Above CreateExampleSet approach wont work due to the Input Port of Kafka Sink is expecting &amp;quot;Streaming Data Connector&amp;quot; object type. Write the Request from Kafka Console-based script or Write Kafka operator from a separate non-streaming workflow</description>
+        </process>
+      </operator>
+      <operator activated="false" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve KofkaCon-290823" width="90" x="179" y="340">
+        <parameter key="repository_entry" value="/Connections/KofkaCon-290823"/>
+      </operator>
+      <operator activated="false" class="multiply" compatibility="10.1.003" expanded="true" height="103" name="Multiply (3)" width="90" x="313" y="340"/>
+      <operator activated="false" class="kafka_connector:read_kafka_topic" compatibility="0.4.000" expanded="true" height="82" name="Read Kafka Topic" width="90" x="447" y="340">
+        <parameter key="kafka_topic" value="mytopik1"/>
+        <parameter key="offset_strategy" value="earliest"/>
+        <parameter key="retrieval_time_out" value="2"/>
+        <parameter key="get_all" value="true"/>
+        <parameter key="number_of_records" value="100"/>
+        <parameter key="collection_strategy" value="duration"/>
+        <parameter key="counter" value="100"/>
+        <parameter key="time_out" value="120"/>
+        <parameter key="polling_time_out" value="5"/>
+        <parameter key="api_timeout" value="10"/>
+      </operator>
+      <operator activated="false" class="kafka_connector:read_kafka_topic" compatibility="0.4.000" expanded="true" height="82" name="Read Kafka Topic (2)" width="90" x="447" y="493">
+        <parameter key="kafka_topic" value="mytopik1"/>
+        <parameter key="offset_strategy" value="earliest"/>
+        <parameter key="retrieval_time_out" value="2"/>
+        <parameter key="get_all" value="true"/>
+        <parameter key="number_of_records" value="100"/>
+        <parameter key="collection_strategy" value="duration"/>
+        <parameter key="counter" value="100"/>
+        <parameter key="time_out" value="120"/>
+        <parameter key="polling_time_out" value="5"/>
+        <parameter key="api_timeout" value="10"/>
+      </operator>
+      <operator activated="false" class="collect" compatibility="10.1.003" expanded="true" height="103" name="Collect" width="90" x="581" y="340">
+        <parameter key="unfold" value="false"/>
+      </operator>
+      <operator activated="false" class="streaming:streaming_nest" compatibility="0.8.000-SNAPSHOT" expanded="true" height="82" name="Federaeted NEST" origin="GENERATED_TUTORIAL" width="90" x="715" y="340">
+        <parameter key="job_name" value="sde-wf1"/>
+        <process expanded="true">
+          <operator activated="true" class="retrieve" compatibility="10.1.003" expanded="true" height="68" name="Retrieve myRTSA" width="90" x="179" y="136">
+            <parameter key="repository_entry" value="/Connections/myRTSA"/>
+          </operator>
+          <operator activated="true" class="admin:deploy_project_rtsa" compatibility="3.0.002" expanded="true" height="82" name="Deploy Project (RTSA)" width="90" x="380" y="136">
+            <parameter key="deployment_name" value="my-deployment"/>
+            <parameter key="project_name" value="sample-test"/>
+            <parameter key="deployment_location" value="/"/>
+            <parameter key="git_reference" value="master"/>
+            <enumeration key="connections"/>
+            <parameter key="time_out" value="120"/>
+            <parameter key="continuous_execution" value="false"/>
+            <parameter key="sleep_time" value="0"/>
+          </operator>
+          <connect from_op="Retrieve myRTSA" from_port="output" to_op="Deploy Project (RTSA)" to_port="rtsa_connection"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">Deploy the designed Streaming Analytic process on the provided Flink Cluster.&lt;br&gt;</description>
+      </operator>
+      <connect from_op="Retrieve Flink1.9-Java11-270923" from_port="output" to_op="Streaming Nest" to_port="connection"/>
+      <connect from_op="Streaming Nest" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Retrieve KofkaCon-290823" from_port="output" to_op="Multiply (3)" to_port="input"/>
+      <connect from_op="Multiply (3)" from_port="output 1" to_op="Read Kafka Topic" to_port="connection"/>
+      <connect from_op="Multiply (3)" from_port="output 2" to_op="Read Kafka Topic (2)" to_port="connection"/>
+      <connect from_op="Read Kafka Topic" from_port="connection" to_op="Collect" to_port="input 1"/>
+      <connect from_op="Read Kafka Topic (2)" from_port="connection" to_op="Collect" to_port="input 2"/>
+      <connect from_op="Collect" from_port="collection" to_op="Federaeted NEST" to_port="connection"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="75" resized="true" width="270" x="283" y="208">Deploy the designed Streaming Analytic process on the provided Flink Cluster.&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>
