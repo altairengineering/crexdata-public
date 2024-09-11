@@ -1,0 +1,14 @@
+Contains ConvNeXt weights after the following steps:
+
+1. Load pre-trained weights from 'imagenet' without `top` layer.
+2. Freeze them
+3. Freeze them, so as to avoid destroying any of the information they contain during future training rounds.
+4. Add some new, trainable layers on top of the frozen layers.
+5. Train the added layers for CIFAR-100 (they will learn to turn the old features into predictions on a new dataset).
+6. Save the weights. ----> !!These are the weight files!!
+
+What must follow is a fine-tuning which:
+
+1. Consists of unfreezing the entire model we obtained above (or part of it), and
+2. Re-training it on the new data with a very low learning rate. This can potentially achieve meaningful improvements,
+   by incrementally adapting the pretrained features to the new data.
