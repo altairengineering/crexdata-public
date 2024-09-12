@@ -1,0 +1,23 @@
+id,query
+0,What areas are being evacuated?
+1,What areas are predicted to be impacted?
+2,What areas are without power?
+3,What barriers are hindering response efforts?
+4,What events have been canceled?
+5,What preparations are being made?
+6,What regions have announced a state of emergency?
+7,What roads are blocked / closed?
+8,What services have been closed?
+9,What warnings are currently in effect?
+10,Where are emergency services deployed?
+11,Where are emergency services needed?
+12,Where are evacuations needed?
+13,Where are people needing rescued?
+14,Where are recovery efforts taking place?
+15,Where has building or infrastructure damage occurred?
+16,Where has flooding occured?
+17,Where are volunteers being requested?
+18,Where has road damage occured?
+19,What area has the wildfire burned?
+20,Where have homes been damaged or destroyed?
+

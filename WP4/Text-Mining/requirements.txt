@@ -1,0 +1,11 @@
+numpy~=1.26.4
+torch~=2.3.0
+scikit-learn~=1.4.2
+pandas~=2.2.2
+transformers~=4.40.2
+evaluate~=0.4.2
+matplotlib~=3.8.4
+peft~=0.10.0
+datasets~=2.19.1
+natsort~=8.4.0
+tqdm

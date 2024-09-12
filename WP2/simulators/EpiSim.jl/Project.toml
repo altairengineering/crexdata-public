@@ -1,0 +1,21 @@
+name = "EpiSim"
+uuid = "31a157ea-f110-4668-b98b-d79f209662d5"
+authors = ["Miguel Ponce-de-Leon <miguel.ponce@bsc.es>"]
+version = "0.1.1"
+
+[deps]
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+HDF5 = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
+MMCACovid19Vac = "1f0b8349-d663-41e2-860e-e4a82e7cc3f6"
+MMCAcovid19 = "3fbf9143-36f1-400e-9c84-fa51782749e9"
+NCDatasets = "85f8d34a-cbdd-5861-8df4-14fed0d494ab"
+NetCDF = "30363a11-5582-574a-97bb-aa9a979735b9"
+PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
