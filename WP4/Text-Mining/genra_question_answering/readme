@@ -1,0 +1,26 @@
+To run the QA model you can execute:
+- python3 run.py --topic innsbruck --batch_size 150 --llm solar --aggregator linear --topk 3
+
+
+run.py expects two csv files:
+	1. The list of queries to search for answers (queries.csv, rename the provided sample or create these file)
+	2. The list of tweets (tweets.csv, rename the provided sample or create these file)
+
+
+The output of the QA includes:
+	1. Each query together with its topk relevant tweets (genra_answers__.csv)
+	2. The final summary based on the retrieved answers (genra_final_summary_.txt) 
+
+
+Requirements:
+
+- PyFLAGR for rank aggregation
+- haystack for indexing 
+- sentence_transformers for text embeddings
+- transformers for LLMs
+
+
+
+QA has been tested with the following LLMs:
+- solar (better results)
+- mistral 
