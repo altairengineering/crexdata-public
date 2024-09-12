@@ -1,0 +1,286 @@
+Node Virus_inside {
+	logic = Virus_inside;
+}
+
+Node Virus_replication {
+	logic = Virus_inside;
+}
+
+Node Chemokin_secretion {
+	logic = Virus_inside;
+}
+
+Node Virus_expression {
+	logic = Virus_expression;
+}
+
+Node TCell_attached {
+	logic = TCell_attached;
+}
+
+Node FAS_FASL_complex {
+
+	logic = (TCell_attached);
+	rate_up  = ( $FAS_FASL_complex_ko ? 0.0 : ( $FAS_FASL_complex_up ? @max_rate : ( @logic ? $u_FAS_FASL_complex : 0)));
+	rate_down  = ( $FAS_FASL_complex_ko ? @max_rate : ( $FAS_FASL_complex_up ? 0.0 : ( @logic ? 0 : $d_FAS_FASL_complex)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+Node BAD_BBC3_BCL2L11_complex {
+
+	logic = (BCL2_MCL1_BCL2L1_complex);
+	rate_up  = ( $BAD_BBC3_BCL2L11_complex_ko ? 0.0 : ( $BAD_BBC3_BCL2L11_complex_up ? @max_rate : ( @logic ? $u_BAD_BBC3_BCL2L11_complex : 0)));
+	rate_down  = ( $BAD_BBC3_BCL2L11_complex_ko ? @max_rate : ( $BAD_BBC3_BCL2L11_complex_up ? 0.0 : ( @logic ? 0 : $d_BAD_BBC3_BCL2L11_complex)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Apoptosome_complex {
+
+	logic = ((( CYCS & APAF1 & CASP9_Cytoplasm_input ) | Unknown_mechanism ) & !AKT1 );
+	rate_up  = ( $Apoptosome_complex_ko ? 0.0 : ( $Apoptosome_complex_up ? @max_rate : ( @logic ? $u_Apoptosome_complex : 0)));
+	rate_down  = ( $Apoptosome_complex_ko ? @max_rate : ( $Apoptosome_complex_up ? 0.0 : ( @logic ? 0 : $d_Apoptosome_complex)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node TNF_TNFRSF1A_complex {
+
+	logic = (TNF_TNFRSF1A_complex);
+	rate_up  = ( $TNF_TNFRSF1A_complex_ko ? 0.0 : ( $TNF_TNFRSF1A_complex_up ? @max_rate : ( @logic ? $u_TNF_TNFRSF1A_complex : 0)));
+	rate_down  = ( $TNF_TNFRSF1A_complex_ko ? @max_rate : ( $TNF_TNFRSF1A_complex_up ? 0.0 : ( @logic ? 0 : $d_TNF_TNFRSF1A_complex)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node TRADD_FADD_complex {
+
+	logic = (TNF_TNFRSF1A_complex & FADD & TRADD);
+	rate_up  = ( $TRADD_FADD_complex_ko ? 0.0 : ( $TRADD_FADD_complex_up ? @max_rate : ( @logic ? $u_TRADD_FADD_complex : 0)));
+	rate_down  = ( $TRADD_FADD_complex_ko ? @max_rate : ( $TRADD_FADD_complex_up ? 0.0 : ( @logic ? 0 : $d_TRADD_FADD_complex)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node BCL2_MCL1_BCL2L1_complex {
+
+	logic = (!Orf7a & E & !BAD) | (Orf7a & !BAD);
+	rate_up  = ( $BCL2_MCL1_BCL2L1_complex_ko ? 0.0 : ( $BCL2_MCL1_BCL2L1_complex_up ? @max_rate : ( @logic ? $u_BCL2_MCL1_BCL2L1_complex : 0)));
+	rate_down  = ( $BCL2_MCL1_BCL2L1_complex_ko ? @max_rate : ( $BCL2_MCL1_BCL2L1_complex_up ? 0.0 : ( @logic ? 0 : $d_BCL2_MCL1_BCL2L1_complex)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node FADD {
+
+	logic = (FAS_FASL_complex);
+	rate_up  = ( $FADD_ko ? 0.0 : ( $FADD_up ? @max_rate : ( @logic ? $u_FADD : 0)));
+	rate_down  = ( $FADD_ko ? @max_rate : ( $FADD_up ? 0.0 : ( @logic ? 0 : $d_FADD)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node CASP8 {
+
+	logic = (!TRADD_FADD_complex & FADD) | (TRADD_FADD_complex);
+	rate_up  = ( $CASP8_ko ? 0.0 : ( $CASP8_up ? @max_rate : ( @logic ? $u_CASP8 : 0)));
+	rate_down  = ( $CASP8_ko ? @max_rate : ( $CASP8_up ? 0.0 : ( @logic ? 0 : $d_CASP8)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node CASP3 {
+
+	logic = ( CASP9_Cytoplasm | CASP8 );
+	rate_up  = ( $CASP3_ko ? 0.0 : ( $CASP3_up ? @max_rate : ( @logic ? $u_CASP3 : 0)));
+	rate_down  = ( $CASP3_ko ? @max_rate : ( $CASP3_up ? 0.0 : ( @logic ? 0 : $d_CASP3)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node CASP9_Cytoplasm_input {
+
+	logic = (CASP9_Cytoplasm_input);
+	rate_up  = ( $CASP9_Cytoplasm_input_ko ? 0.0 : ( $CASP9_Cytoplasm_input_up ? @max_rate : ( @logic ? $u_CASP9_Cytoplasm_input : 0)));
+	rate_down  = ( $CASP9_Cytoplasm_input_ko ? @max_rate : ( $CASP9_Cytoplasm_input_up ? 0.0 : ( @logic ? 0 : $d_CASP9_Cytoplasm_input)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node CASP9_Cytoplasm {
+
+	logic = (Apoptosome_complex & !AKT1);
+	rate_up  = ( $CASP9_Cytoplasm_ko ? 0.0 : ( $CASP9_Cytoplasm_up ? @max_rate : ( @logic ? $u_CASP9_Cytoplasm : 0)));
+	rate_down  = ( $CASP9_Cytoplasm_ko ? @max_rate : ( $CASP9_Cytoplasm_up ? 0.0 : ( @logic ? 0 : $d_CASP9_Cytoplasm)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node BID {
+
+	logic = (CASP8);
+	rate_up  = ( $BID_ko ? 0.0 : ( $BID_up ? @max_rate : ( @logic ? $u_BID : 0)));
+	rate_down  = ( $BID_ko ? @max_rate : ( $BID_up ? 0.0 : ( @logic ? 0 : $d_BID)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node CYCS {
+
+	logic = (MAPK14 | MOMP);
+	rate_up  = ( $CYCS_ko ? 0.0 : ( $CYCS_up ? @max_rate : ( @logic ? $u_CYCS : 0)));
+	rate_down  = ( $CYCS_ko ? @max_rate : ( $CYCS_up ? 0.0 : ( @logic ? 0 : $d_CYCS)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node APAF1 {
+
+	logic = (BAX);
+	rate_up  = ( $APAF1_ko ? 0.0 : ( $APAF1_up ? @max_rate : ( @logic ? $u_APAF1 : 0)));
+	rate_down  = ( $APAF1_ko ? @max_rate : ( $APAF1_up ? 0.0 : ( @logic ? 0 : $d_APAF1)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node AKT1 {
+
+	logic = (!M);
+	rate_up  = ( $AKT1_ko ? 0.0 : ( $AKT1_up ? @max_rate : ( @logic ? $u_AKT1 : 0)));
+	rate_down  = ( $AKT1_ko ? @max_rate : ( $AKT1_up ? 0.0 : ( @logic ? 0 : $d_AKT1)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node BAX {
+
+	logic = (!BAD_BBC3_BCL2L11_complex & !BCL2_MCL1_BCL2L1_complex & BID) | (BAD_BBC3_BCL2L11_complex & !BCL2_MCL1_BCL2L1_complex);
+	rate_up  = ( $BAX_ko ? 0.0 : ( $BAX_up ? @max_rate : ( @logic ? $u_BAX : 0)));
+	rate_down  = ( $BAX_ko ? @max_rate : ( $BAX_up ? 0.0 : ( @logic ? 0 : $d_BAX)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Apoptosis_phenotype {
+
+	logic = (CASP3);
+	rate_up = @logic ? $u_Apoptosis_phenotype : 0;
+	rate_down = @logic ? 0 : $d_Apoptosis_phenotype;
+}
+
+Node M {
+
+	logic = (Virus_expression);
+	rate_up  = ( $M_ko ? 0.0 : ( $M_up ? @max_rate : ( @logic ? $u_M : 0)));
+	rate_down  = ( $M_ko ? @max_rate : ( $M_up ? 0.0 : ( @logic ? 0 : $d_M)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Orf7a {
+
+	logic = (Virus_expression);
+	rate_up  = ( $Orf7a_ko ? 0.0 : ( $Orf7a_up ? @max_rate : ( @logic ? $u_Orf7a : 0)));
+	rate_down  = ( $Orf7a_ko ? @max_rate : ( $Orf7a_up ? 0.0 : ( @logic ? 0 : $d_Orf7a)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node TRADD {
+
+	logic = (TRADD);
+	rate_up  = ( $TRADD_ko ? 0.0 : ( $TRADD_up ? @max_rate : ( @logic ? $u_TRADD : 0)));
+	rate_down  = ( $TRADD_ko ? @max_rate : ( $TRADD_up ? 0.0 : ( @logic ? 0 : $d_TRADD)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Orf3a {
+
+	logic = (Virus_expression);
+	rate_up  = ( $Orf3a_ko ? 0.0 : ( $Orf3a_up ? @max_rate : ( @logic ? $u_Orf3a : 0)));
+	rate_down  = ( $Orf3a_ko ? @max_rate : ( $Orf3a_up ? 0.0 : ( @logic ? 0 : $d_Orf3a)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node MAPK14 {
+
+	logic = (Orf3a);
+	rate_up  = ( $MAPK14_ko ? 0.0 : ( $MAPK14_up ? @max_rate : ( @logic ? $u_MAPK14 : 0)));
+	rate_down  = ( $MAPK14_ko ? @max_rate : ( $MAPK14_up ? 0.0 : ( @logic ? 0 : $d_MAPK14)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node E {
+
+	logic = (Virus_expression);
+	rate_up  = ( $E_ko ? 0.0 : ( $E_up ? @max_rate : ( @logic ? $u_E : 0)));
+	rate_down  = ( $E_ko ? @max_rate : ( $E_up ? 0.0 : ( @logic ? 0 : $d_E)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node BAD {
+
+	logic = (!AKT1);
+	rate_up  = ( $BAD_ko ? 0.0 : ( $BAD_up ? @max_rate : ( @logic ? $u_BAD : 0)));
+	rate_down  = ( $BAD_ko ? @max_rate : ( $BAD_up ? 0.0 : ( @logic ? 0 : $d_BAD)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Orf3b {
+
+	logic = (Virus_expression);
+	rate_up  = ( $Orf3b_ko ? 0.0 : ( $Orf3b_up ? @max_rate : ( @logic ? $u_Orf3b : 0)));
+	rate_down  = ( $Orf3b_ko ? @max_rate : ( $Orf3b_up ? 0.0 : ( @logic ? 0 : $d_Orf3b)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Orf8a {
+
+	logic = (Virus_expression);
+	rate_up  = ( $Orf8a_ko ? 0.0 : ( $Orf8a_up ? @max_rate : ( @logic ? $u_Orf8a : 0)));
+	rate_down  = ( $Orf8a_ko ? @max_rate : ( $Orf8a_up ? 0.0 : ( @logic ? 0 : $d_Orf8a)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node N {
+
+	logic = (Virus_expression);
+	rate_up  = ( $N_ko ? 0.0 : ( $N_up ? @max_rate : ( @logic ? $u_N : 0)));
+	rate_down  = ( $N_ko ? @max_rate : ( $N_up ? 0.0 : ( @logic ? 0 : $d_N)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Orf6 {
+
+	logic = (Virus_expression);
+	rate_up  = ( $Orf6_ko ? 0.0 : ( $Orf6_up ? @max_rate : ( @logic ? $u_Orf6 : 0)));
+	rate_down  = ( $Orf6_ko ? @max_rate : ( $Orf6_up ? 0.0 : ( @logic ? 0 : $d_Orf6)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node S {
+
+	logic = (Virus_expression);
+	rate_up  = ( $S_ko ? 0.0 : ( $S_up ? @max_rate : ( @logic ? $u_S : 0)));
+	rate_down  = ( $S_ko ? @max_rate : ( $S_up ? 0.0 : ( @logic ? 0 : $d_S)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Orf9b {
+
+	logic = (Virus_expression);
+	rate_up  = ( $Orf9b_ko ? 0.0 : ( $Orf9b_up ? @max_rate : ( @logic ? $u_Orf9b : 0)));
+	rate_down  = ( $Orf9b_ko ? @max_rate : ( $Orf9b_up ? 0.0 : ( @logic ? 0 : $d_Orf9b)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+Node Unknown_mechanism {
+
+	logic = ( Orf3b | Orf8a | N | Orf6 | S | Orf9b );
+	rate_up  = ( $Unknown_mechanism_ko ? 0.0 : ( $Unknown_mechanism_up ? @max_rate : ( @logic ? $u_Unknown_mechanism : 0)));
+	rate_down  = ( $Unknown_mechanism_ko ? @max_rate : ( $Unknown_mechanism_up ? 0.0 : ( @logic ? 0 : $d_Unknown_mechanism)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
+
+Node Apoptosis_type_I {
+
+	logic = ( Apoptosis_phenotype & CASP8 & !Apoptosis_type_II);
+	rate_up = @logic ? $u_Apoptosis_type_I : 0;
+	rate_down = @logic ? 0 : $d_Apoptosis_type_I;
+}
+
+Node Apoptosis_type_II {
+
+	logic = ( Apoptosis_phenotype & CASP9_Cytoplasm & !Apoptosis_type_I);
+	rate_up = @logic ? $u_Apoptosis_type_II : 0;
+	rate_down = @logic ? 0 : $d_Apoptosis_type_II;
+}
+
+Node MOMP {
+
+	logic = ( BAX );
+	rate_up  = ( $MOMP_ko ? 0.0 : ( $MOMP_up ? @max_rate : ( @logic ? $u_MOMP : 0)));
+	rate_down  = ( $MOMP_ko ? @max_rate : ( $MOMP_up ? 0.0 : ( @logic ? 0 : $d_MOMP)));
+ 	 max_rate = 1.7976931348623157E+308/1;
+}
