@@ -1,1 +1,1 @@
-Folder for NCSR code.
+Folder for NCSR code. Also available on github.
