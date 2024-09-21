@@ -1,0 +1,55 @@
+{"train_id":0,"optimisation_id":-1,"id":0,"timestamp":1467331311150,"type":"train","params":"{\"params\": {\"confidence\": 0.09200060121075973, \"order\": 4, \"pmin\": 0.002711565340401184, \"gamma\": 0.008694960780476964}}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":1,"timestamp":1467936148501,"type":"opt_initialise","params":"{\"params\": null}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":2,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.15702108750029936, 4, 0.007079543513421198, 0.0073351325102767985]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":3,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.4176556032398733, 4, 0.005721946253248523, 0.000987197891952084]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":4,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.43750989942105506, 2, 0.005722321755011525, 0.0009872022745243529]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":5,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.1320857081308165, 2, 0.003441653747983925, 0.0010095990230988663]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":6,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.04419214694817079, 2, 0.002627783898227415, 0.0010176074452495553]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":7,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.0, 2, 0.0030003862119277157, 0.0010026840482222073]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":8,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.17114913627568004, 2, 0.003449504287343419, 0.0010101065637532747]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":9,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.35328832190164833, 2, 0.003530651037686357, 0.0010132620277766558]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":10,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.23763916259256784, 2, 0.0034625499037061313, 0.0010110133466634352]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":11,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.1792304605816799, 2, 0.003469728731026995, 0.000996752592104054]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":12,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.05195746546575498, 2, 0.0025666356234948016, 0.0010201268167109431]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":13,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.2858515006597442, 2, 0.0035469769773368467, 0.0009941183935410196]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":14,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.22246057897194066, 2, 0.003547219848323664, 0.0009955459217283879]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":15,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.5239899165072835, 2, 0.003580311420786354, 0.0009266553390103906]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":16,"timestamp":1467936148501,"type":"opt_step","params":"{\"params\": [0.2769098152244695, 2, 0.003520032067259991, 0.0009875481609717069]}","best_i":-1}
+{"train_id":-1,"optimisation_id":0,"id":17,"timestamp":1467936148501,"type":"opt_finalise","params":"{\"params\": null}","best_i":11}
+{"train_id":1,"optimisation_id":-1,"id":18,"timestamp":1472775106700,"type":"train","params":"{\"params\": {\"order\": 2, \"confidence\": 0.2858515006597442, \"pmin\": 0.0035469769773368467, \"gamma\": 0.0009941183935410196}}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":19,"timestamp":1473379897040,"type":"opt_initialise","params":"{\"params\": null}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":20,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.13774518314852585, 3, 0.002529506266815039, 0.001371870180376647]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":21,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.17175947705268604, 2, 0.0037851807962718475, 0.0010110036271735478]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":22,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.8433999705017912, 3, 0.002963037696957202, 0.0010110286927357867]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":23,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.21573921171337956, 2, 0.0035751009772653163, 0.0010112228381937995]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":24,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.26790952478111735, 3, 0.005824805947741535, 0.0010107592351272594]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":25,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.09292390300155894, 4, 0.0017927290570697453, 0.0013719561932698935]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":26,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.14356764928378404, 4, 0.0009144479006780802, 0.001371843956568423]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":27,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.14805084188655326, 4, 0.002811489661167467, 0.00137211595721243]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":28,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.08363247887874918, 5, 0.0020300580443609983, 0.0013716740487732363]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":29,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.02275015438585507, 4, 0.005821660765924808, 0.0013718522729369304]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":30,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.030087384952198946, 4, 0.0001, 0.0013716731599533437]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":31,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.030696292998910416, 3, 0.003695681872820237, 0.0013713238979122019]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":32,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.24344420487328133, 2, 0.0029061720951606388, 0.0010109200025459127]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":33,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.367674192951865, 2, 0.003455809914517214, 0.001043648450778185]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":34,"timestamp":1473379897040,"type":"opt_step","params":"{\"params\": [0.19075963594031156, 2, 0.0034638103886603204, 0.0010044384124636276]}","best_i":-1}
+{"train_id":-1,"optimisation_id":1,"id":35,"timestamp":1473379897040,"type":"opt_finalise","params":"{\"params\": null}","best_i":10}
+{"train_id":2,"optimisation_id":-1,"id":36,"timestamp":1480033179066,"type":"train","params":"{\"params\": {\"order\": 4, \"confidence\": 0.030087384952198946, \"pmin\": 0.0001, \"gamma\": 0.0013716731599533437}}","best_i":-1}
+{"train_id":3,"optimisation_id":-1,"id":37,"timestamp":1511484514340,"type":"train","params":"{\"params\": {\"order\": 4, \"confidence\": 0.030087384952198946, \"pmin\": 0.0001, \"gamma\": 0.0013716731599533437}}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":38,"timestamp":1512089297769,"type":"opt_initialise","params":"{\"params\": null}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":39,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18682243594703504, 3, 0.00010000000000318798, 0.001371245388107158]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":40,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.1868713262977821, 3, 0.00014279830504040683, 0.0013668536202760386]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":41,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18169373475440023, 3, 0.0001, 0.0017766150151974501]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":42,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18011456658134514, 3, 0.0001, 0.0001]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":43,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.33884354095471486, 3, 0.0001, 0.0018226961730922662]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":44,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18689477810725563, 3, 0.0001, 0.0022848868289470424]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":45,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18587409452586956, 3, 0.0001, 0.0019380851998214957]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":46,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18738976369806296, 3, 0.0001, 0.0021037002852216167]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":47,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.9759345972127932, 5, 0.00657687617925472, 0.008117320275625856]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":48,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.04561895164883235, 1, 0.006857449739389385, 0.002000494777315136]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":49,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.12302449139607392, 3, 0.0001, 0.006180535854370139]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":50,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.18835893518014127, 3, 0.0001, 0.0018351771398979562]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":51,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [0.13971456132042095, 2, 0.007372991172846466, 0.0033288355061262846]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":52,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [1.0, 2, 0.0001, 0.01]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":53,"timestamp":1512089297769,"type":"opt_step","params":"{\"params\": [1.0, 1, 0.0001, 0.01]}","best_i":-1}
+{"train_id":-1,"optimisation_id":2,"id":54,"timestamp":1512089297769,"type":"opt_finalise","params":"{\"params\": null}","best_i":6}

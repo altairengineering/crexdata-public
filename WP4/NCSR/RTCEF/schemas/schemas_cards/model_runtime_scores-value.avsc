@@ -1,0 +1,26 @@
+{
+  "type": "record",
+  "name": "model_runtime_score",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "long"
+    },
+    {
+      "name": "model_version",
+      "type": "int"
+    },
+    {
+        "name": "creation_method",
+        "type": "string"
+    },
+    {
+      "name": "batch_metrics",
+      "type": "string"
+    },
+    {
+      "name": "runtime_metrics",
+      "type": "string"
+    }
+  ]
+}

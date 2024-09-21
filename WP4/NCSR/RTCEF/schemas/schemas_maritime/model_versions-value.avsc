@@ -1,0 +1,24 @@
+{
+  "type": "record",
+  "name": "ModelVersion",
+  "fields": [{
+    "name": "creation_method",
+    "type": ["null", "string"],
+    "default": null
+  }, {
+    "name": "id",
+    "type": ["null", "int"],
+    "default": null
+  }, {
+    "name": "path",
+    "type": ["null", "string"],
+    "default": null
+  }, {
+    "name": "model_params",
+    "type": "string"
+  },{
+    "name": "pt",
+    "type": "long"
+  }
+  ]
+}

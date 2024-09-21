@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "factory_command",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ]
+}

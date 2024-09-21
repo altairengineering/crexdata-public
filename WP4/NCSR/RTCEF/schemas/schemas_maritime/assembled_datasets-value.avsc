@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "DatasetVersion",
+  "fields": [{
+    "name": "buckets_range",
+    "type": ["null", {
+      "type": "array",
+      "items": ["null", "int"]
+    }],
+    "default": null
+  }, {
+    "name": "path_prefix",
+    "type": ["null", "string"],
+    "default": null
+  }, {
+    "name": "version",
+    "type": ["null", "int"],
+    "default": null
+  }]
+}

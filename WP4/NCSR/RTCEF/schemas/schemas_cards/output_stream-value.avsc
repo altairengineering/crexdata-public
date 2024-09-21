@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "Record",
+  "doc":  "Maritime dataset input record (key).",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "long"
+    },
+    {
+      "name": "mmsi",
+      "type": "string"
+    }
+  ]
+}

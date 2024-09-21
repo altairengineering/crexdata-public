@@ -1,0 +1,2 @@
+{"creation_method":"retrain","id":0,"path":"\/home\/manospits\/projects\/onfore\/data\/saved_models\/forecasting\/wayeb_0.model","model_params":"{\"confidence\": 0.20351487435265825, \"order\": 1, \"pmin\": 0.0008048465873811756, \"gamma\": 0.002296506175022903}","pt":101}
+{"creation_method":"optimisation","id":16,"path":"\/home\/manospits\/projects\/onfore\/data\/saved_models\/forecasting\/wayeb_16.model","model_params":"{\"order\": 5, \"confidence\": 0.1513253282909761, \"pmin\": 0.0015072129013266437, \"gamma\": 0.00033033703524529474}","pt":2950}

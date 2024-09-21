@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "ModelVersion",
+  "fields": [{
+    "name": "id",
+    "type": ["null", "int"],
+    "default": null
+  }]
+}

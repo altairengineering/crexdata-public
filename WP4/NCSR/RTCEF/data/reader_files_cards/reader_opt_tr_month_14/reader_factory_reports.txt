@@ -1,0 +1,6 @@
+{"reply_id":0,"params_dict":"{\"params\": {\"confidence\": 0.1689103996137077, \"order\": 4, \"pmin\": 0.001979631047657623, \"gamma\": 0.008228125868863416}}","model_id":0,"metrics":""}
+{"reply_id":1,"params_dict":"{\"params\": {\"confidence\": 0.1689103996137077, \"order\": 4, \"pmin\": 0.001979631047657623, \"gamma\": 0.008228125868863416}}","model_id":1,"metrics":""}
+{"reply_id":2,"params_dict":"{\"params\": {\"confidence\": 0.1689103996137077, \"order\": 4, \"pmin\": 0.001979631047657623, \"gamma\": 0.008228125868863416}}","model_id":2,"metrics":""}
+{"reply_id":3,"params_dict":"{\"params\": {\"confidence\": 0.1689103996137077, \"order\": 4, \"pmin\": 0.001979631047657623, \"gamma\": 0.008228125868863416}}","model_id":3,"metrics":""}
+{"reply_id":4,"params_dict":"{\"params\": {\"confidence\": 0.1689103996137077, \"order\": 4, \"pmin\": 0.001979631047657623, \"gamma\": 0.008228125868863416}}","model_id":4,"metrics":""}
+{"reply_id":5,"params_dict":"{\"params\": {\"confidence\": 0.1689103996137077, \"order\": 4, \"pmin\": 0.001979631047657623, \"gamma\": 0.008228125868863416}}","model_id":5,"metrics":""}

@@ -1,0 +1,6 @@
++(DistanceBetweenPredicate(-4.7051,48.1281,8.0,9.0),DistanceBetweenPredicate(-4.7051,48.1281,9.0,10.0)),
++(IsEventTypePredicate(RESET)),
++(SpeedBetween(0.0,1.0),SpeedBetween(9.0,10.0),SpeedBetween(10.0,11.0),SpeedBetween(11.0,12.0)),
+~(IsEventTypePredicate(RESET),WithinCirclePredicate(-4.7051,48.1281,8.0),DistanceBetweenPredicate(-4.7051,48.1281,8.0,9.0),DistanceBetweenPredicate(-4.7051,48.1281,9.0,10.0)),
+~(IsEventTypePredicate(RESET),WithinCirclePredicate(-4.7051,48.1281,8.0),OutsideCirclePredicate(-4.7051,48.1281,8.0)),
+~(IsEventTypePredicate(RESET),SpeedBetween(0.0,1.0),SpeedBetween(1.0,9.0),SpeedBetween(9.0,10.0),SpeedBetween(10.0,11.0),SpeedBetween(11.0,12.0))

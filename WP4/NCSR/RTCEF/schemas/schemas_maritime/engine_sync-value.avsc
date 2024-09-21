@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "Record",
+  "doc":  "Maritime dataset input record (key).",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "long"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "model_id",
+      "type": "int"
+    }
+  ]
+}

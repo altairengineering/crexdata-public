@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "DatasetVersion",
+  "fields": [{
+    "name": "version",
+    "type": ["null", "int"],
+    "default": null
+  }]
+}

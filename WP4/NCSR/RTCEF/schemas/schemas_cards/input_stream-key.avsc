@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "Record",
+  "doc":  "Cards dataset input record (key).",
+  "fields": [
+    {
+      "name": "trx_no",
+      "type": "long"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+ujson~=5.9.0
+simplejson~=3.19.2
+kafka-python
+py4j
+numpy~=1.19.5
+scikit-optimize
+scipy
+avro~=1.11.3
+fastavro
+lz4

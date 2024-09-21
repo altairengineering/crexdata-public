@@ -1,0 +1,34 @@
+{
+  "type": "record",
+  "name": "factory_command",
+  "fields": [
+    {
+      "name": "train_id",
+      "type": "long"
+    },
+    {
+      "name": "optimisation_id",
+      "type": "long"
+    },
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+       "name": "timestamp",
+       "type": "long"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "params",
+      "type": "string"
+    },
+    {
+      "name": "best_i",
+      "type": "long"
+    }
+  ]
+}

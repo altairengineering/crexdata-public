@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "model_runtime_score",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "long"
+    }
+  ]
+}

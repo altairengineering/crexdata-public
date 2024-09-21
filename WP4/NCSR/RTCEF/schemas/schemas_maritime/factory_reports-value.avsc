@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "factory_report_value",
+  "fields": [
+    {
+      "name": "reply_id",
+      "type": "long"
+    },
+    {
+      "name": "params_dict",
+      "type": "string"
+    },
+    {
+      "name": "model_id",
+      "type": "long"
+    },
+    {
+      "name": "metrics",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "factory_report_key",
+  "fields": [
+    {
+      "name": "reply_id",
+      "type": "long"
+    }
+  ]
+}

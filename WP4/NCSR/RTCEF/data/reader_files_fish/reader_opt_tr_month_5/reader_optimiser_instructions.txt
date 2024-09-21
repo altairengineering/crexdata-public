@@ -1,0 +1,8 @@
+{"id":0,"instruction":"train","timestamp":1447279208}
+{"id":1,"instruction":"optimise","timestamp":1447884008}
+{"id":2,"instruction":"optimise","timestamp":1448488809}
+{"id":3,"instruction":"train","timestamp":1452117612}
+{"id":4,"instruction":"optimise","timestamp":1452722412}
+{"id":5,"instruction":"train","timestamp":1455746413}
+{"id":6,"instruction":"optimise","timestamp":1456351213}
+{"id":7,"instruction":"train","timestamp":1458770415}

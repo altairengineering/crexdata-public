@@ -1,0 +1,39 @@
+{
+  "type": "record",
+  "name": "Record",
+  "doc":  "Cards dataset input record.",
+  "fields": [
+    {
+      "name": "trx_no",
+      "type": "long"
+    },
+    {
+      "name": "timestamp",
+      "type": "long"
+    },
+    {
+      "name": "pan",
+      "type": "string"
+    },
+    {
+      "name": "amount",
+      "type": "double"
+    },
+    {
+      "name": "amount_diff",
+      "type": "double"
+    },
+    {
+      "name": "time_diff",
+      "type": "long"
+    },
+    {
+      "name": "is_fraud",
+      "type": "long"
+    },
+    {
+      "name": "fraud_type",
+      "type": "long"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "EnginePosition",
+  "fields": [{
+    "name": "offset",
+    "type":  "long"
+  }, {
+    "name": "timestamp",
+    "type":  "long"
+  }]
+}

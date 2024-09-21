@@ -1,0 +1,127 @@
+{
+  "type": "record",
+  "name": "Record",
+  "doc":  "Maritime dataset input record.",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "long"
+    },
+    {
+      "name": "mmsi",
+      "type": "string"
+    },
+    {
+      "name": "speed",
+      "type": "double"
+    },
+    {
+      "name": "trh",
+      "type": "double"
+    },
+    {
+      "name": "cog",
+      "type": "double"
+    },
+    {
+      "name": "lat",
+      "type": "double"
+    },
+    {
+      "name": "lon",
+      "type": "double"
+    },
+    {
+      "name": "change_in_heading",
+      "type": "long"
+    },
+    {
+      "name": "change_in_speed_end",
+      "type": "long"
+    },
+    {
+      "name": "change_in_speed_start",
+      "type": "long"
+    },
+    {
+      "name": "slow_motion_start",
+      "type": "long"
+    },
+    {
+      "name": "slow_motion_end",
+      "type": "long"
+    },
+    {
+      "name": "stop_end",
+      "type": "long"
+    },
+    {
+      "name": "stop_start",
+      "type": "long"
+    },
+    {
+      "name": "gap_start",
+      "type": "long"
+    },
+    {
+      "name": "gap_end",
+      "type": "long"
+    },
+    {
+      "name": "next_timestamp",
+      "type": "long"
+    },
+    {
+      "name": "entry_nearcoast",
+      "type": "long"
+    },
+    {
+      "name": "entry_nearcoast5k",
+      "type": "long"
+    },
+    {
+      "name": "entry_fishing",
+      "type": "long"
+    },
+    {
+      "name": "entry_natura",
+      "type": "long"
+    },
+    {
+      "name": "entry_nearports",
+      "type": "long"
+    },
+    {
+      "name": "entry_anchorage",
+      "type": "long"
+    },
+    {
+      "name": "exit_nearcoast",
+      "type": "long"
+    },
+    {
+      "name": "exit_nearcoast5k",
+      "type": "long"
+    },
+    {
+      "name": "exit_fishing",
+      "type": "long"
+    },
+    {
+      "name": "exit_natura",
+      "type": "long"
+    },
+    {
+      "name": "exit_nearports",
+      "type": "long"
+    },
+    {
+      "name": "exit_anchorage",
+      "type": "long"
+    },
+    {
+      "name": "critical_bitstring",
+      "type": "string"
+    }
+  ]
+}

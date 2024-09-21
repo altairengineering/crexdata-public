@@ -1,0 +1,7 @@
+;(
+ *(OutsideCirclePredicate(-4.7051,48.1281,8.0)),
+ OutsideCirclePredicate(-4.7051,48.1281,8.0),
+ OutsideCirclePredicate(-4.7051,48.1281,8.0),
+ *(^(WithinCirclePredicate(-4.7051,48.1281,8.0), -SpeedBetween(1.0,9.0))),
+ ^(WithinCirclePredicate(-4.7051,48.1281,8.0), SpeedBetween(1.0,9.0))
+ ){order:0}{partitionBy:mmsi}

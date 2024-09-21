@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "InstructionToOpt",
+  "fields": [{
+    "name": "id",
+    "type": ["null", "int"],
+    "default": null
+  }]
+}

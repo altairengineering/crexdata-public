@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "Record",
+  "doc":  "Engine sync record for experimental setup.",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": "long"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    }
+  ]
+}

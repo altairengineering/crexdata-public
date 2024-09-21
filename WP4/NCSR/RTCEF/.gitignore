@@ -1,0 +1,6 @@
+/data/input/interpolated_ba_sorted.json
+/logs/execution/*.log
+/data/collected/dt_bucket_*
+/data/assembled/assembled_dataset_version_*
+/venv
+/.idea
