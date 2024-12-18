@@ -1,0 +1,79 @@
+{
+  "network" : "network_15_1",
+  "sites" : [ {
+    "siteName" : "cloud",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0-0-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0-0-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0-1-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0-1-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1-0-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1-0-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1-1-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1-1-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  } ]
+}

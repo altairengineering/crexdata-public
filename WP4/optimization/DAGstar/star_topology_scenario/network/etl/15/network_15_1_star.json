@@ -1,0 +1,79 @@
+{
+  "network" : "network_15_1",
+  "sites" : [ {
+    "siteName" : "cloud",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-0",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-1",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-2",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-3",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-4",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-5",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-6",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-7",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-8",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-9",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-10",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-11",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-12",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  }, {
+    "siteName" : "cloud-13",
+    "availablePlatforms" : [ {
+      "platformName" : "platform_0"
+    } ]
+  } ]
+}

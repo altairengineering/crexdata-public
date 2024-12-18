@@ -1,0 +1,28 @@
+{
+  "operators": [
+    {"id": 1, "name": "sink", "fixed": false},
+    {"id": 2, "name": "mqttPublish", "fixed": false},
+    {"id": 3, "name": "azureTableInsert", "fixed": true},
+    {"id": 4, "name": "csvToSenML", "fixed": true},
+    {"id": 5, "name": "annotate", "fixed": false},
+    {"id": 6, "name": "join", "fixed": false},
+    {"id": 7, "name": "interpolation", "fixed": false},
+    {"id": 8, "name": "bloomFilter", "fixed": false},
+    {"id": 9, "name": "rangeFilter", "fixed": false},
+    {"id": 10, "name": "senMLParse", "fixed": true},
+    {"id": 11, "name": "source", "fixed": true}
+  ],
+  "edges": [
+    {"from": 1, "to": 2},
+    {"from": 1, "to": 3},
+    {"from": 2, "to": 4},
+    {"from": 3, "to": 5},
+    {"from": 4, "to": 5},
+    {"from": 5, "to": 6},
+    {"from": 6, "to": 7},
+    {"from": 7, "to": 8},
+    {"from": 8, "to": 9},
+    {"from": 9, "to": 10},
+    {"from": 10, "to": 11}
+  ]
+}

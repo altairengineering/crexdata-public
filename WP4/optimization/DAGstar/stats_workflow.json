@@ -1,0 +1,29 @@
+{
+  "operators": [
+    {"id": 1, "name": "sink", "fixed": false},
+    {"id": 2, "name": "blobUpload", "fixed": true},
+    {"id": 3, "name": "zip", "fixed": true},
+    {"id": 4, "name": "slidingLinearReg", "fixed": true},
+    {"id": 5, "name": "kalmanFilter", "fixed": false},
+    {"id": 6, "name": "senMLParse", "fixed": true},
+    {"id": 7, "name": "source", "fixed": false},
+    {"id": 8, "name": "average", "fixed": false},
+    {"id": 9, "name": "distinctCount", "fixed": false},
+    {"id": 10, "name": "plt", "fixed": true},
+    {"id": 11, "name": "acc", "fixed": false}
+  ],
+  "edges": [
+    {"from": 1, "to": 2},
+    {"from": 2, "to": 3},
+    {"from": 3, "to": 10},
+    {"from": 10, "to": 11},
+    {"from": 11, "to": 4},
+    {"from": 11, "to": 8},
+    {"from": 11, "to": 9},
+    {"from": 4, "to": 5},
+    {"from": 5, "to": 6},
+    {"from": 6, "to": 7},
+    {"from": 8, "to": 6},
+    {"from": 9, "to": 6}
+  ]
+}

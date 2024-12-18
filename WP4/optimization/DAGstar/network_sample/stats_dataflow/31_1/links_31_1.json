@@ -1,0 +1,123 @@
+{
+  "links" : [ {
+    "from" : "cloud-0",
+    "to" : "cloud",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-0-0",
+    "to" : "cloud-0",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-0-0-0",
+    "to" : "cloud-0-0",
+    "latency" : 8.0
+  }, {
+    "from" : "cloud-0-0-0-0",
+    "to" : "cloud-0-0-0",
+    "latency" : 7.0
+  }, {
+    "from" : "cloud-0-0-0-1",
+    "to" : "cloud-0-0-0",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-0-0-1",
+    "to" : "cloud-0-0",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-0-0-1-0",
+    "to" : "cloud-0-0-1",
+    "latency" : 10.0
+  }, {
+    "from" : "cloud-0-0-1-1",
+    "to" : "cloud-0-0-1",
+    "latency" : 4.0
+  }, {
+    "from" : "cloud-0-1",
+    "to" : "cloud-0",
+    "latency" : 10.0
+  }, {
+    "from" : "cloud-0-1-0",
+    "to" : "cloud-0-1",
+    "latency" : 3.0
+  }, {
+    "from" : "cloud-0-1-0-0",
+    "to" : "cloud-0-1-0",
+    "latency" : 3.0
+  }, {
+    "from" : "cloud-0-1-0-1",
+    "to" : "cloud-0-1-0",
+    "latency" : 8.0
+  }, {
+    "from" : "cloud-0-1-1",
+    "to" : "cloud-0-1",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-0-1-1-0",
+    "to" : "cloud-0-1-1",
+    "latency" : 6.0
+  }, {
+    "from" : "cloud-0-1-1-1",
+    "to" : "cloud-0-1-1",
+    "latency" : 7.0
+  }, {
+    "from" : "cloud-1",
+    "to" : "cloud",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-1-0",
+    "to" : "cloud-1",
+    "latency" : 3.0
+  }, {
+    "from" : "cloud-1-0-0",
+    "to" : "cloud-1-0",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-1-0-0-0",
+    "to" : "cloud-1-0-0",
+    "latency" : 8.0
+  }, {
+    "from" : "cloud-1-0-0-1",
+    "to" : "cloud-1-0-0",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-1-0-1",
+    "to" : "cloud-1-0",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-1-0-1-0",
+    "to" : "cloud-1-0-1",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-1-0-1-1",
+    "to" : "cloud-1-0-1",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-1-1",
+    "to" : "cloud-1",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-1-1-0",
+    "to" : "cloud-1-1",
+    "latency" : 7.0
+  }, {
+    "from" : "cloud-1-1-0-0",
+    "to" : "cloud-1-1-0",
+    "latency" : 4.0
+  }, {
+    "from" : "cloud-1-1-0-1",
+    "to" : "cloud-1-1-0",
+    "latency" : 6.0
+  }, {
+    "from" : "cloud-1-1-1",
+    "to" : "cloud-1-1",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-1-1-1-0",
+    "to" : "cloud-1-1-1",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-1-1-1-1",
+    "to" : "cloud-1-1-1",
+    "latency" : 9.0
+  } ]
+}

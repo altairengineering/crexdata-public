@@ -1,0 +1,22 @@
+{
+  "operators": [
+    {"id": 1, "name": "sink", "fixed": false},
+    {"id": 2, "name": "mqttPublish", "fixed": false},
+    {"id": 3, "name": "blobWrite", "fixed": true},
+    {"id": 4, "name": "decisionTreeTrain", "fixed": true},
+    {"id": 5, "name": "multiVarLinearRegTrain", "fixed": true},
+    {"id": 6, "name": "annotation", "fixed": false},
+    {"id": 7, "name": "tableRead", "fixed": true},
+    {"id": 8, "name": "source", "fixed": false}
+  ],
+  "edges": [
+    {"from": 1, "to": 2},
+    {"from": 2, "to": 3},
+    {"from": 3, "to": 4},
+    {"from": 3, "to": 5},
+    {"from": 4, "to": 6},
+    {"from": 5, "to": 7},
+    {"from": 6, "to": 7},
+    {"from": 7, "to": 8}
+  ]
+}

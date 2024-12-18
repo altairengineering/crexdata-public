@@ -1,0 +1,115 @@
+{
+  "links" : [ {
+    "from" : "cloud",
+    "to" : "cloud-0",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-0",
+    "to" : "gateway-0",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-1",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-1",
+    "to" : "gateway-1",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-2",
+    "latency" : 6.0
+  }, {
+    "from" : "cloud-2",
+    "to" : "gateway-2",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-3",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-3",
+    "to" : "gateway-3",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-4",
+    "latency" : 9.0
+  }, {
+    "from" : "cloud-4",
+    "to" : "gateway-4",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-5",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-5",
+    "to" : "gateway-5",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-6",
+    "latency" : 7.0
+  }, {
+    "from" : "cloud-6",
+    "to" : "gateway-6",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-7",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-7",
+    "to" : "gateway-7",
+    "latency" : 4.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-8",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud-8",
+    "to" : "gateway-8",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-9",
+    "latency" : 10.0
+  }, {
+    "from" : "cloud-9",
+    "to" : "gateway-9",
+    "latency" : 3.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-10",
+    "latency" : 5.0
+  }, {
+    "from" : "cloud-10",
+    "to" : "gateway-10",
+    "latency" : 1.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-11",
+    "latency" : 7.0
+  }, {
+    "from" : "cloud-11",
+    "to" : "gateway-11",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-12",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-12",
+    "to" : "gateway-12",
+    "latency" : 3.0
+  }, {
+    "from" : "cloud",
+    "to" : "cloud-13",
+    "latency" : 8.0
+  }, {
+    "from" : "cloud-13",
+    "to" : "gateway-13",
+    "latency" : 1.0
+  } ]
+}

@@ -1,0 +1,27 @@
+{
+  "links" : [ {
+    "from" : "cloud-0",
+    "to" : "cloud",
+    "latency" : 3.0
+  }, {
+    "from" : "cloud-0-0",
+    "to" : "cloud-0",
+    "latency" : 2.0
+  }, {
+    "from" : "cloud-0-1",
+    "to" : "cloud-0",
+    "latency" : 10.0
+  }, {
+    "from" : "cloud-1",
+    "to" : "cloud",
+    "latency" : 8.0
+  }, {
+    "from" : "cloud-1-0",
+    "to" : "cloud-1",
+    "latency" : 8.0
+  }, {
+    "from" : "cloud-1-1",
+    "to" : "cloud-1",
+    "latency" : 3.0
+  } ]
+}
