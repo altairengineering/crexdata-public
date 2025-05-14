@@ -1,3 +1,6 @@
+Question Answering Module 
+============
+
 To run the QA model you can execute:
 - python3 run.py --topic innsbruck --batch_size 150 --llm solar --aggregator linear --topk 3
 
