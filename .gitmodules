@@ -1,0 +1,3 @@
+[submodule "CREXDATA System Components/RapidMiner Extensions/Data Integration Extensions/Drone Data Integration/odm_kafka_bridge"]
+	path = CREXDATA System Components/RapidMiner Extensions/Data Integration Extensions/Drone Data Integration/odm_kafka_bridge
+	url = https://github.com/rettungsrobotik/odm_kafka_bridge.git
