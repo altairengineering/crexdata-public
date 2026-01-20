@@ -1,3 +1,21 @@
 [submodule "CREXDATA System Components/RapidMiner Extensions/Data Integration Extensions/Drone Data Integration/odm_kafka_bridge"]
 	path = CREXDATA System Components/RapidMiner Extensions/Data Integration Extensions/Drone Data Integration/odm_kafka_bridge
 	url = https://github.com/rettungsrobotik/odm_kafka_bridge.git
+[submodule "CREXDATA System Components/Simulators/Simulators for the Health Emergency Use Case/Simulator for Epidemiology Scenario/EpiSim.jl"]
+	path = CREXDATA System Components/Simulators/Simulators for the Health Emergency Use Case/Simulator for Epidemiology Scenario/EpiSim.jl
+	url = https://github.com/Epi-Sim/EpiSim.jl
+[submodule "CREXDATA System Components/Simulators/Simulators for the Health Emergency Use Case/Simulator for Epidemiology Scenario/MMCAcovid19.jl"]
+	path = CREXDATA System Components/Simulators/Simulators for the Health Emergency Use Case/Simulator for Epidemiology Scenario/MMCAcovid19.jl
+	url = https://github.com/Epi-Sim/MMCAcovid19.jl
+[submodule "CREXDATA System Components/Simulators/Simulators for the Health Emergency Use Case/Simulator for Epidemiology Scenario/MMCACovid19Vac.jl"]
+	path = CREXDATA System Components/Simulators/Simulators for the Health Emergency Use Case/Simulator for Epidemiology Scenario/MMCACovid19Vac.jl
+	url = https://github.com/Epi-Sim/MMCACovid19Vac.jl
+[submodule "CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-emews"]
+	path = CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-emews
+	url = https://github.com/Epi-Sim/episim-emews
+[submodule "CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-rl"]
+	path = CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-rl
+	url = https://github.com/Epi-Sim/episim-rl
+[submodule "CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-models"]
+	path = CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-models
+	url = https://github.com/Epi-Sim/episim-models
