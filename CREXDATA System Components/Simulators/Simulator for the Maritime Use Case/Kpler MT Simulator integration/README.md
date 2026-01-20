@@ -59,4 +59,9 @@ For support and further inquires: ggrigoropoulos@kpler.com / [ggrigor89](https:/
 Giannis Spiliopoulos [gsplpls](https://github.com/gsplpls) 
 Ilias Chamatidis [ichamatidis-kpler](https://github.com/ichamatidis-kpler)
 
+## Terms and Conditions 
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/
 
+Copyright (c) 2026 Kpler
