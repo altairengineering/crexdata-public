@@ -4,7 +4,7 @@ The [Crexdata Maritime Use Case](https://crexdata.eu/maritime/) is advancing mar
 - Collision Forecasting and Rerouting
 - Hazardous Weather Rerouting
 
-In the [workflows](./Workflows/) folder contains  the following workflow specifications:
+The [workflows](./Workflows/) folder contains  the following workflow specifications:
   -  `crexdata-MMDF-Maritime Use Case-FULL.rmp` : The main maritime use case workflow that takes advantage of the MMDF toolbox to combine ASV telemetry with Automatic Indentification System (AIS) data and static files through their kafka metatdata records. 
   - `crexdata-maritime - sea-trials-sent-mission.rmp` : Api worklow wrapping up decicated REST-API calls for assigning mission to ASVs on field
   - `crexdata-maritime - sea-trials-start-vessels.rmp` : Api worklow wrapping up decicated REST-API calls for sending "start mission" command to ASVs on field
