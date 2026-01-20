@@ -1,0 +1,4 @@
+data_path="c:\CommonGISprojects\tracks-avia\TAPAS\AIML-20210531\20190703\0_delays\"
+decisions="scenario_20190703_exp0_decisions"
+flight_plans="scenario_20190703_exp0_baseline_flight_plans"
+sector_capacities="scenario_20190703_capacities.csv"

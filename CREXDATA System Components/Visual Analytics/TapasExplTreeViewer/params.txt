@@ -1,0 +1,4 @@
+data_path="c:\CommonGISprojects\tracks-avia\TAPAS\AIML-20210531\20190703\2_capping_delays\"
+decisions="scenario_20190703_capping_delays_exp2_decisions"
+flight_plans="scenario_20190703_capping_delays_exp2_baseline_flight_plans"
+sector_capacities="scenario_20190703_capping_delays_capacities.csv"

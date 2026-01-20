@@ -1,0 +1,1 @@
+pathToRules="c:\CommonGISprojects\Lamarr\model_rules\"
