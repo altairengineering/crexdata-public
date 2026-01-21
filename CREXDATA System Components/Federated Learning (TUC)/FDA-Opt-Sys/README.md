@@ -215,3 +215,10 @@ descriptions that meet any needs.
 
 **Note**: We expect a minified JSON 
 (no whitespaces, tabs, newlines, comments, etc.)
+
+---
+
+## License 
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+
