@@ -1,8 +1,0 @@
-
-*.o
-unit-test-conservation.exe
-Makefile-backup
-*.exe
-*.dat
-*.json
-*.pyc
