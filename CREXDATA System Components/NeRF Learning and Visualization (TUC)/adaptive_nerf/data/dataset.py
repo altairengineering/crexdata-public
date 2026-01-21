@@ -8,9 +8,10 @@ from .image_metadata import ImageMetadata
 from utils import discover_cluster_cells
 
 
-def get_dataset(P, dataset, only_test=False, ray_gen_kwargs: dict = None):
+def get_dataset(P, dataset, only_test=False, ray_gen_kwargs: dict = None, logger=None):
     """Build NeRF train/val ray datasets for 'drz' in flat or masked (cell) layout."""
-
+    
+    log = print if logger is None else logger.log 
     train_set = None
     test_set = None
     P.data_size = None
@@ -22,8 +23,8 @@ def get_dataset(P, dataset, only_test=False, ray_gen_kwargs: dict = None):
             coordinate_info["origin_drb"],
             coordinate_info["pose_scale_factor"],
         )
-        print(f"Origin: {origin_drb}, scale factor: {pose_scale_factor}")
-        print(
+        log(f"Origin: {origin_drb}, scale factor: {pose_scale_factor}")
+        log(
             "(near,far) Derived from intersections with Scenebox and override clips. Determined by clustering step!"
         )
 
@@ -36,30 +37,30 @@ def get_dataset(P, dataset, only_test=False, ray_gen_kwargs: dict = None):
             camera_positions = torch.cat(
                 [x.c2w[:3, 3].unsqueeze(0) for x in train_metadata + val_metadata]
             )
-            print(
+            log(
                 "Camera range in metric space: {} {}".format(
                     camera_positions.min(dim=0)[0] * pose_scale_factor + origin_drb,
                     camera_positions.max(dim=0)[0] * pose_scale_factor + origin_drb,
                 )
             )
-            print(
+            log(
                 "Camera range in [-1, 1] space: {} {}".format(
                     camera_positions.min(dim=0)[0], camera_positions.max(dim=0)[0]
                 )
             )
-            print(
+            log(
                 f"Using {len(train_metadata)} training and {len(val_metadata)} validation images."
             )
 
             kwargs = {"center_pixels": True, "ray_gen_kwargs": ray_gen_kwargs}
 
-            print(f"Processing Training Images")
+            log(f"Processing Training Images")
             train_set = RamRaysDataset(
                 metadata_items=train_metadata,
                 num_workers=P.num_workers,
                 **kwargs,
             )
-            print(f"Processing Validation Images")
+            log(f"Processing Validation Images")
             test_set = RamRaysDataset(
                 metadata_items=val_metadata,
                 num_workers=P.num_workers,
@@ -78,7 +79,7 @@ def get_dataset(P, dataset, only_test=False, ray_gen_kwargs: dict = None):
             assert (
                 mask_cells == P.num_submodules
             ), f"Mismatch. Mask directory contains {mask_cells} regions but the experiment is configured for {P.num_submodules}."
-            print(f"Discovered {mask_cells} cells in masks: {mask_root}")
+            log(f"Discovered {mask_cells} cells in masks: {mask_root}")
 
             train_sets, val_sets = [], []
             expert_box_list = ray_gen_kwargs.pop("expert_box_list")
@@ -100,7 +101,7 @@ def get_dataset(P, dataset, only_test=False, ray_gen_kwargs: dict = None):
                 ray_gen_kwargs["scene_box"] = expert_box_list[cell_id].to("cpu")
                 kwargs = {"center_pixels": True, "ray_gen_kwargs": ray_gen_kwargs}
 
-                print(f"Context generation for subgrid {cell_id}...")
+                log(f"Context generation for subgrid {cell_id}...")
 
                 train_ds = (
                     RamRaysDataset(

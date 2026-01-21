@@ -965,7 +965,7 @@ class TaskDataset(IterableDataset):
             )
 
     def __len__(self):
-        return len(self.eligible_cells)
+        return 1000000  # arbitrary large number for endless iterator
 
     # ---------- overlap checks ----------
     @staticmethod

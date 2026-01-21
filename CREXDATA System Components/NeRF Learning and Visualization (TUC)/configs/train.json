@@ -1,6 +1,6 @@
 {
   "op": "train",
-  "save_step":5,
+  "save_step":200,
 
   "seed": 0,
   "dataset": "drz",
@@ -9,9 +9,8 @@
   "mask_dirname": "g22_grid_bm110_ss11",
   "downscale": 0.25,
 
-
-  "near": 0.0,
-  "far": 100000,
+  "near": "",
+  "far": "",
   "ray_samples":96,
   "chunk_points": 4000000,
   "boundary_margin": 1.0,
@@ -45,11 +44,11 @@
   "no_scheduler": false,
   "decay_factor": 10.0,
 
-  "checkpoint_path": "logs/example",
+  "checkpoint_path": "example",
   "prefix": "step20000",
   "use_stored_args": false,
 
-  "outer_steps": 10000,
+  "outer_steps": 20005,
   "inner_iter": 8,
   "inner_lr": 0.015
 }

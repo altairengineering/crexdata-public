@@ -9,7 +9,7 @@
   "downscale": 0.25,
 
   "use_amp": true,
-  "checkpoint_path": "logs/example",
+  "checkpoint_path": "example",
   "prefix": "step20000",
   "ray_samples": 64
 }

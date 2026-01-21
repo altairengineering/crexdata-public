@@ -40,7 +40,7 @@ def build_parser():
     parser.add_argument("--downscale", type=float, default=0.25)
     parser.add_argument("--near", type=float, default=None)
     parser.add_argument("--far", type=float, default=None)
-    parser.add_argument("--bm", type=float, default=1.05)
+    parser.add_argument("--boundary_margin", type=float, default=1.05)
 
     # --- episode gen
     parser.add_argument("--support_rays", type=int, default=4000)
@@ -63,7 +63,7 @@ def build_parser():
     parser.add_argument("--color_hidden", type=int, default=64)
 
     # --- hash encoding
-    parser.add_argument("--max_res", type=int, default=4096)
+    parser.add_argument("--max_resolution", type=int, default=4096)
     parser.add_argument("--log2_hashmap_size", type=int, default=20)
     parser.add_argument("--use_occ", action="store_true")
     parser.add_argument(
@@ -228,9 +228,6 @@ def parse_args():
     argv = sys.argv[1:]
     args = parser.parse_args(argv)
 
-    if args.checkpoint_path == "":
-        args.checkpoint_path = None
-
     cli_dests = _cli_provided_dests(parser, argv)
 
     ckpt_cfg = None
@@ -263,6 +260,11 @@ def parse_args():
                 continue
             if k in cli_dests:
                 continue
+
+            # normalize empty / null-like values
+            if v in ("", "null", "None"):
+                v = None
+
             setattr(args, k, v)
 
     # Re-force arch after JSON merge if checkpoint is present.

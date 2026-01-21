@@ -104,20 +104,8 @@ def meta_update(
     else:
         raise ValueError(f"Unsupported algo {algo!r}")
 
-    with torch.no_grad():
-        for cid, expert in enumerate(model.submodules):
-            total_norm = 0.0
-            for p in expert.parameters():
-                if p.grad is not None:
-                    total_norm += p.grad.norm().item() ** 2
-            total_norm = total_norm**0.5
-            print(f"debug/outer_grad_norm_region_{cid}: ", total_norm)
-
     if scheduler is not None:
         scheduler.step()
-
-    lrs = [g["lr"] for g in optimizer.param_groups]
-    print(f"group LRs = {lrs}")
 
 
 def maml_meta_update(optimizer, loss_out, scaler=None, grad_clip=1.0):
