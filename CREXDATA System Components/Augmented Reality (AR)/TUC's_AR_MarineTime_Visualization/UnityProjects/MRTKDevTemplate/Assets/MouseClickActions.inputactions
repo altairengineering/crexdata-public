@@ -1,0 +1,34 @@
+{
+    "name": "MouseClickActions",
+    "maps": [
+        {
+            "name": "MouseActions",
+            "id": "5a0afbeb-17ae-4330-8584-80a1e6d8cda1",
+            "actions": [
+                {
+                    "name": "LeftClickHold",
+                    "type": "Button",
+                    "id": "7804b0bb-1858-4dfa-99ec-bd2286ce4c1c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7ed60d33-bd2f-4a53-8faa-2535e9264a7f",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftClickHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
