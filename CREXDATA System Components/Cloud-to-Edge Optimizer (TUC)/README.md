@@ -1,1 +1,1 @@
-The most up-to-date version of this repository can be found at: https://github.com/DBanelas/tuc-crexdata-extensions
+This repository has been cloned from The most up-to-date version of this repository can be found at: https://github.com/DBanelas/tuc-crexdata-extensions . Individual README and LICENSE files can be found in each of the 2 subdirectories.

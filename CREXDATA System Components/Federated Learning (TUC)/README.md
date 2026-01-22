@@ -1,0 +1,2 @@
+This repository includes our novel techniques regarding Federated Learning and the simulation of Federated Learning environments using the NS3 simulator. 
+Individual README and LICENSE files can be located at the 3 subdirectories.
