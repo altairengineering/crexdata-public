@@ -1,0 +1,34 @@
+{
+    "name": "HandPinchActions",
+    "maps": [
+        {
+            "name": "HandGestures",
+            "id": "5fabb966-111f-4b63-b4a5-effabdfe5839",
+            "actions": [
+                {
+                    "name": "Pinch",
+                    "type": "Value",
+                    "id": "8b6cbf13-761f-4aa4-96e3-675e29dd759e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "663aa3e3-6919-43c6-891b-5ab4a17eba95",
+                    "path": "XRController(LeftHand)/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pinch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
