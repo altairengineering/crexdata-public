@@ -19,3 +19,7 @@
 [submodule "CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-models"]
 	path = CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/episim-models
 	url = https://github.com/Epi-Sim/episim-models
+[submodule "CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/COVID19-emews-physiboss"]
+	path = CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/COVID19-emews-physiboss
+	url = https://github.com/thalioo/COVID19.git
+	branch = emews-pbc

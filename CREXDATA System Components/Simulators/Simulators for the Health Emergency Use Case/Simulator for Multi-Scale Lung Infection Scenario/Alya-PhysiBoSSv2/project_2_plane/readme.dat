@@ -1,0 +1,3 @@
+To generate the projection:
+project_2_plane fensap-deposition.pts
+it will generate fensap-deposition.pts-depo.csv
