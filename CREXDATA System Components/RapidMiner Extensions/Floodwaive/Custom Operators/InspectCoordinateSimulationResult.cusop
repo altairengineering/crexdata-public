@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.5.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.5.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="process_defined_operators:read_dictionary" compatibility="2.0.000" expanded="true" height="82" name="Read Dictionary" width="90" x="45" y="136"/>
+      <operator activated="true" class="extract_macro" compatibility="10.5.000" expanded="true" height="68" name="Extract Macro" width="90" x="179" y="136">
+        <parameter key="macro" value="token"/>
+        <parameter key="macro_type" value="data_value"/>
+        <parameter key="statistics" value="average"/>
+        <parameter key="attribute_name" value="token"/>
+        <parameter key="example_index" value="1"/>
+        <list key="additional_macros"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:text_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Text Parameter Macro" width="90" x="313" y="136">
+        <parameter key="macro" value="simulation_id"/>
+        <parameter key="text_type" value="PLAIN"/>
+        <parameter key="template_text" value="Please enter the Simulation Id"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:double_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Double Parameter Macro" width="90" x="447" y="136">
+        <parameter key="macro" value="x"/>
+        <parameter key="value" value="7.401908"/>
+        <parameter key="min" value="-180.0"/>
+        <parameter key="max" value="180.0"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:double_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Double Parameter Macro (2)" width="90" x="581" y="136">
+        <parameter key="macro" value="y"/>
+        <parameter key="value" value="51.5154"/>
+        <parameter key="min" value="-90.0"/>
+        <parameter key="max" value="90.0"/>
+      </operator>
+      <operator activated="false" class="branch" compatibility="10.5.000" expanded="true" height="82" name="Branch" width="90" x="380" y="34">
+        <parameter key="condition_type" value="expression"/>
+        <parameter key="expression" value="%{area}==&quot;Dortmund&quot;"/>
+        <parameter key="io_object" value="ANOVAMatrix"/>
+        <parameter key="return_inner_output" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="set_macro" compatibility="10.5.000" expanded="true" height="68" name="area_id" width="90" x="112" y="34">
+            <parameter key="macro" value="area_id"/>
+            <parameter key="value" value="20250519130422"/>
+          </operator>
+          <portSpacing port="source_condition" spacing="0"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="sink_input 1" spacing="0"/>
+        </process>
+        <process expanded="true">
+          <operator activated="true" class="set_macro" compatibility="10.5.000" expanded="true" height="68" name="area_id (2)" width="90" x="112" y="34">
+            <parameter key="macro" value="area_id"/>
+            <parameter key="value" value="error"/>
+          </operator>
+          <portSpacing port="source_condition" spacing="0"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="sink_input 1" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="web:crud_get" compatibility="10.0.002" expanded="true" height="82" name="GET (REST) (2)" width="90" x="313" y="238">
+        <parameter key="request_url" value="https://api.floodwaive.de/v1/simulations/%{simulation_id}/raw-point-data?x=%{x}&amp;y=%{y}"/>
+        <list key="request_headers">
+          <parameter key="Authorization" value="Bearer %{token}"/>
+        </list>
+        <parameter key="response_body_type" value="json"/>
+        <parameter key="inject_connection_secret" value="false"/>
+        <parameter key="fail_on_endpoint_error" value="true"/>
+        <description align="center" color="transparent" colored="false" width="126">Get single event details</description>
+      </operator>
+      <operator activated="true" class="subprocess" compatibility="10.5.000" expanded="true" height="82" name="Format to ExampleSet" width="90" x="447" y="238">
+        <process expanded="true">
+          <operator activated="true" class="text:json_to_data" compatibility="10.1.000" expanded="true" height="82" name="JSON To Data" width="90" x="45" y="34">
+            <parameter key="ignore_arrays" value="false"/>
+            <parameter key="limit_attributes" value="false"/>
+            <parameter key="skip_invalid_documents" value="false"/>
+            <parameter key="guess_data_types" value="true"/>
+            <parameter key="keep_missing_attributes" value="false"/>
+            <parameter key="missing_values_aliases" value=", null, NaN, missing"/>
+            <parameter key="preserve_attribute_order" value="true"/>
+          </operator>
+          <operator activated="true" class="blending:select_attributes" compatibility="10.5.000" expanded="true" height="82" name="Select Attributes" width="90" x="45" y="136">
+            <parameter key="type" value="include attributes"/>
+            <parameter key="attribute_filter_type" value="regular expression"/>
+            <parameter key="select_attribute" value=""/>
+            <parameter key="select_subset" value=""/>
+            <parameter key="expression" value="water.*"/>
+            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="true"/>
+          </operator>
+          <operator activated="true" class="blending:select_attributes" compatibility="10.5.000" expanded="true" height="82" name="Select Attributes (6)" width="90" x="45" y="391">
+            <parameter key="type" value="include attributes"/>
+            <parameter key="attribute_filter_type" value="regular expression"/>
+            <parameter key="select_attribute" value=""/>
+            <parameter key="select_subset" value=""/>
+            <parameter key="expression" value="coordinates.*"/>
+            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="true"/>
+          </operator>
+          <operator activated="true" class="format_numbers" compatibility="10.5.000" expanded="true" height="82" name="Format Numbers" width="90" x="179" y="391">
+            <parameter key="attribute_filter_type" value="all"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="numeric"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="real"/>
+            <parameter key="block_type" value="value_series"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_series_end"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="format_type" value="pattern"/>
+            <parameter key="pattern" value="0.00000000"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="use_grouping" value="false"/>
+          </operator>
+          <operator activated="true" class="blending:rename" compatibility="10.5.000" expanded="true" height="82" name="Rename (3)" width="90" x="313" y="391">
+            <list key="rename attributes">
+              <parameter key="coordinates[0]" value="Longitude X"/>
+              <parameter key="coordinates[1]" value="Latitude Y"/>
+            </list>
+            <parameter key="from_attribute" value=""/>
+            <parameter key="to_attribute" value=""/>
+          </operator>
+          <operator activated="true" class="transpose" compatibility="10.5.000" expanded="true" height="82" name="Transpose" width="90" x="179" y="136"/>
+          <operator activated="true" class="blending:generate_columns" compatibility="10.5.000" expanded="true" height="82" name="Generate Attributes (2)" width="90" x="313" y="136">
+            <list key="function_descriptions">
+              <parameter key="item" value="id"/>
+            </list>
+            <parameter key="keep_all_columns" value="true"/>
+            <parameter key="default_time_zone" value="Europe/Berlin"/>
+          </operator>
+          <operator activated="true" class="replace" compatibility="10.5.000" expanded="true" height="82" name="Replace" width="90" x="447" y="136">
+            <parameter key="attribute_filter_type" value="single"/>
+            <parameter key="attribute" value="item"/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="nominal"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="file_path"/>
+            <parameter key="block_type" value="single_value"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="single_value"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="true"/>
+            <parameter key="replace_what" value="\D*(\d+)\]\..*"/>
+            <parameter key="replace_by" value="$1"/>
+          </operator>
+          <operator activated="true" class="operator_toolbox:group_into_collection" compatibility="2.18.000" expanded="true" height="82" name="Group Into Collection" width="90" x="581" y="136">
+            <parameter key="group_by_attribute" value="item"/>
+            <parameter key="group_by_attribute (numerical)" value=""/>
+            <parameter key="sorting_order" value="none"/>
+          </operator>
+          <operator activated="true" class="loop_collection" compatibility="10.5.000" expanded="true" height="82" name="Loop Collection" width="90" x="179" y="238">
+            <parameter key="set_iteration_macro" value="false"/>
+            <parameter key="macro_name" value="iteration"/>
+            <parameter key="macro_start_value" value="1"/>
+            <parameter key="unfold" value="false"/>
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.5.000" expanded="true" height="68" name="Extract Macro (2)" width="90" x="45" y="34">
+                <parameter key="macro" value="item"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="item"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <operator activated="true" class="replace" compatibility="10.5.000" expanded="true" height="82" name="Replace (2)" width="90" x="179" y="34">
+                <parameter key="attribute_filter_type" value="single"/>
+                <parameter key="attribute" value="id"/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="nominal"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="file_path"/>
+                <parameter key="block_type" value="single_value"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="single_value"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="true"/>
+                <parameter key="replace_what" value="[^\.]+\.(.+)"/>
+                <parameter key="replace_by" value="$1"/>
+              </operator>
+              <operator activated="true" class="blending:set_role" compatibility="10.5.000" expanded="true" height="82" name="Set Role" width="90" x="313" y="34">
+                <list key="set_roles">
+                  <parameter key="id" value="regular"/>
+                </list>
+              </operator>
+              <operator activated="true" class="blending:pivot" compatibility="10.5.000" expanded="true" height="103" name="Pivot" width="90" x="447" y="34">
+                <parameter key="group_by_attributes" value="item"/>
+                <parameter key="column_grouping_attribute" value="id"/>
+                <list key="aggregation_attributes">
+                  <parameter key="att_1" value="first"/>
+                </list>
+                <parameter key="use_default_aggregation" value="false"/>
+                <parameter key="default_aggregation_function" value="first"/>
+              </operator>
+              <operator activated="true" class="rename_by_replacing" compatibility="10.5.000" expanded="true" height="82" name="Rename by Replacing" width="90" x="581" y="34">
+                <parameter key="attribute_filter_type" value="all"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="replace_what" value="first\(att_1\)_"/>
+              </operator>
+              <operator activated="false" class="blending:generate_columns" compatibility="10.5.000" expanded="true" height="82" name="Generate Attributes (6)" width="90" x="112" y="187">
+                <list key="function_descriptions">
+                  <parameter key="waterlevel" value="id+&quot;:&quot;+att_1"/>
+                </list>
+                <parameter key="keep_all_columns" value="true"/>
+                <parameter key="default_time_zone" value="Europe/Berlin"/>
+              </operator>
+              <operator activated="false" class="aggregate" compatibility="10.5.000" expanded="true" height="82" name="Aggregate" width="90" x="246" y="187">
+                <parameter key="use_default_aggregation" value="true"/>
+                <parameter key="attribute_filter_type" value="single"/>
+                <parameter key="attribute" value="waterlevel"/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="default_aggregation_function" value="concatenation"/>
+                <list key="aggregation_attributes"/>
+                <parameter key="group_by_attributes" value=""/>
+                <parameter key="count_all_combinations" value="false"/>
+                <parameter key="only_distinct" value="false"/>
+                <parameter key="ignore_missings" value="true"/>
+              </operator>
+              <operator activated="false" class="replace" compatibility="10.5.000" expanded="true" height="82" name="Replace (3)" width="90" x="179" y="289">
+                <parameter key="attribute_filter_type" value="single"/>
+                <parameter key="attribute" value="concat(waterlevel)"/>
+                <parameter key="attributes" value="id"/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="nominal"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="file_path"/>
+                <parameter key="block_type" value="single_value"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="single_value"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="true"/>
+                <parameter key="replace_what" value="\|"/>
+                <parameter key="replace_by" value=" , "/>
+              </operator>
+              <operator activated="false" class="blending:rename" compatibility="10.5.000" expanded="true" height="82" name="Rename" width="90" x="313" y="289">
+                <list key="rename attributes">
+                  <parameter key="concat(waterlevel)" value="waterlevel"/>
+                </list>
+                <parameter key="from_attribute" value=""/>
+                <parameter key="to_attribute" value=""/>
+              </operator>
+              <operator activated="true" class="blending:generate_columns" compatibility="10.5.000" expanded="true" height="82" name="Generate Attributes (7)" width="90" x="849" y="34">
+                <list key="function_descriptions">
+                  <parameter key="item" value="eval(%{item})"/>
+                </list>
+                <parameter key="keep_all_columns" value="true"/>
+                <parameter key="default_time_zone" value="Europe/Berlin"/>
+              </operator>
+              <connect from_port="single" to_op="Extract Macro (2)" to_port="example set"/>
+              <connect from_op="Extract Macro (2)" from_port="example set" to_op="Replace (2)" to_port="example set input"/>
+              <connect from_op="Replace (2)" from_port="example set output" to_op="Set Role" to_port="example set input"/>
+              <connect from_op="Set Role" from_port="example set output" to_op="Pivot" to_port="input"/>
+              <connect from_op="Pivot" from_port="output" to_op="Rename by Replacing" to_port="example set input"/>
+              <connect from_op="Rename by Replacing" from_port="example set output" to_op="Generate Attributes (7)" to_port="table input"/>
+              <connect from_op="Generate Attributes (6)" from_port="table output" to_op="Aggregate" to_port="example set input"/>
+              <connect from_op="Aggregate" from_port="example set output" to_op="Replace (3)" to_port="example set input"/>
+              <connect from_op="Replace (3)" from_port="example set output" to_op="Rename" to_port="example set input"/>
+              <connect from_op="Generate Attributes (7)" from_port="table output" to_port="output 1"/>
+              <portSpacing port="source_single" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_output 1" spacing="0"/>
+              <portSpacing port="sink_output 2" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="operator_toolbox:advanced_append" compatibility="2.18.000" expanded="true" height="82" name="Append (Superset)" width="90" x="313" y="238"/>
+          <operator activated="true" class="blending:sort" compatibility="10.5.000" expanded="true" height="82" name="Sort (2)" width="90" x="581" y="238">
+            <list key="sort_by">
+              <parameter key="item" value="ascending"/>
+            </list>
+          </operator>
+          <operator activated="true" class="blending:select_attributes" compatibility="10.5.000" expanded="true" height="82" name="Select Attributes (8)" width="90" x="715" y="238">
+            <parameter key="type" value="exclude attributes"/>
+            <parameter key="attribute_filter_type" value="one attribute"/>
+            <parameter key="select_attribute" value="item"/>
+            <parameter key="select_subset" value=""/>
+            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+          </operator>
+          <operator activated="true" class="cartesian_product" compatibility="10.5.000" expanded="true" height="82" name="Cartesian (2)" width="90" x="715" y="340">
+            <parameter key="remove_double_attributes" value="true"/>
+          </operator>
+          <connect from_port="in 1" to_op="JSON To Data" to_port="documents 1"/>
+          <connect from_op="JSON To Data" from_port="example set" to_op="Select Attributes" to_port="example set input"/>
+          <connect from_op="Select Attributes" from_port="example set output" to_op="Transpose" to_port="example set input"/>
+          <connect from_op="Select Attributes" from_port="original" to_op="Select Attributes (6)" to_port="example set input"/>
+          <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Format Numbers" to_port="example set input"/>
+          <connect from_op="Format Numbers" from_port="example set output" to_op="Rename (3)" to_port="example set input"/>
+          <connect from_op="Rename (3)" from_port="example set output" to_op="Cartesian (2)" to_port="right"/>
+          <connect from_op="Transpose" from_port="example set output" to_op="Generate Attributes (2)" to_port="table input"/>
+          <connect from_op="Generate Attributes (2)" from_port="table output" to_op="Replace" to_port="example set input"/>
+          <connect from_op="Replace" from_port="example set output" to_op="Group Into Collection" to_port="exa"/>
+          <connect from_op="Group Into Collection" from_port="col" to_op="Loop Collection" to_port="collection"/>
+          <connect from_op="Loop Collection" from_port="output 1" to_op="Append (Superset)" to_port="example set 1"/>
+          <connect from_op="Append (Superset)" from_port="merged set" to_op="Sort (2)" to_port="example set input"/>
+          <connect from_op="Sort (2)" from_port="example set output" to_op="Select Attributes (8)" to_port="example set input"/>
+          <connect from_op="Select Attributes (8)" from_port="example set output" to_op="Cartesian (2)" to_port="left"/>
+          <connect from_op="Cartesian (2)" from_port="join" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="blending:generate_columns" compatibility="10.5.000" expanded="true" height="82" name="Generate Attributes" width="90" x="581" y="238">
+        <list key="function_descriptions">
+          <parameter key="simulation_id" value="%{simulation_id}"/>
+        </list>
+        <parameter key="keep_all_columns" value="true"/>
+        <parameter key="default_time_zone" value="Europe/Berlin"/>
+      </operator>
+      <connect from_port="input 1" to_op="Read Dictionary" to_port="connection"/>
+      <connect from_op="Read Dictionary" from_port="example set" to_op="Extract Macro" to_port="example set"/>
+      <connect from_op="Extract Macro" from_port="example set" to_op="Text Parameter Macro" to_port="through 1"/>
+      <connect from_op="Text Parameter Macro" from_port="through 1" to_op="Double Parameter Macro" to_port="through 1"/>
+      <connect from_op="Double Parameter Macro" from_port="through 1" to_op="Double Parameter Macro (2)" to_port="through 1"/>
+      <connect from_op="GET (REST) (2)" from_port="response" to_op="Format to ExampleSet" to_port="in 1"/>
+      <connect from_op="Format to ExampleSet" from_port="out 1" to_op="Generate Attributes" to_port="table input"/>
+      <connect from_op="Generate Attributes" from_port="table output" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="125" resized="true" width="540" x="37" y="1070">Floodwaive API Key Edin&lt;br&gt;fw_ba692f29ca5d40cdbae6c6fd75179a3a</description>
+    </process>
+  </operator>
+  <title>Inspect Coordinate Simulation result </title>
+  <icon>earth_location.png</icon>
+  <description/>
+  <synopsis/>
+  <number-of-inputs>1</number-of-inputs>
+  <number-of-outputs>1</number-of-outputs>
+  <defines-optionals>true</defines-optionals>
+  <param-ordering>true</param-ordering>
+  <gets-random-seed>true</gets-random-seed>
+  <custom-operator-type>standard</custom-operator-type>
+  <template-parameters>
+    <template-parameter>
+      <operator>Text Parameter Macro</operator>
+      <parameter>value</parameter>
+      <alias>simulation_id</alias>
+      <documentation>The text macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Double Parameter Macro</operator>
+      <parameter>value</parameter>
+      <alias>x_coordinate_longitude</alias>
+      <documentation>The double macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Double Parameter Macro (2)</operator>
+      <parameter>value</parameter>
+      <alias>y_coordinate_latitude</alias>
+      <documentation>The double macro value defined by the user.</documentation>
+    </template-parameter>
+  </template-parameters>
+  <input-docu>
+    <port>
+      <type>com.rapidminer.operator.IOObject</type>
+      <description>An input port</description>
+    </port>
+  </input-docu>
+  <output-docu>
+    <port>
+      <type>com.rapidminer.operator.text.Document</type>
+      <description>A result port</description>
+    </port>
+  </output-docu>
+  <tutorials/>
+</process>

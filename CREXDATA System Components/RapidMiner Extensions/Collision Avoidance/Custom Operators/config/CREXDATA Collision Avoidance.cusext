@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><root>
+  <name>CREXDATA Collision Avoidance</name>
+  <vendor>CREXDATA</vendor>
+  <homepage/>
+  <folder>//collision_detection/CustomOperatorExtension/cusop definitions/</folder>
+  <objects_folder/>
+  <color>255,102,102</color>
+  <version>1.0.1</version>
+  <jars/>
+  <icons/>
+  <calculate_deps>false</calculate_deps>
+  <icon>arrow_around</icon>
+  <hide_processes>false</hide_processes>
+  <ordered_files>StartKplerCollisionAvoidance,DeleteKplerCollisionAvoidanceJob</ordered_files>
+</root>

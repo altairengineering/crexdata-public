@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><root>
+  <name>CREXDATA Floodwaive</name>
+  <vendor>CREXDATA project</vendor>
+  <homepage>https://crexdata.eu</homepage>
+  <folder>//Floodwaive/Custom Operators/</folder>
+  <objects_folder/>
+  <color>153,153,255</color>
+  <version>1.1.0</version>
+  <jars/>
+  <icons/>
+  <calculate_deps>false</calculate_deps>
+  <icon>water</icon>
+  <hide_processes>false</hide_processes>
+  <ordered_files>CreateRainfallEvent,GetRainfallEvents,ViewRainfallEventDetails,DeleteRainfallEvent,CreateFloodMitigationMeasure,ListAreaFloodMitigationMeasures,ViewMitigationMeasureDetails,DeleteMitigationMeasure,CreateFloodSimulation,ListSimulations,ViewProgressOfSimulationCalculation,ViewSimulationDetails,InspectCoordinateSimulationResult,DeleteSimulation</ordered_files>
+</root>
