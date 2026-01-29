@@ -23,3 +23,9 @@
 	path = CREXDATA Use Case Scenarios/Health Emergency Use Case/Workflows/COVID19-emews-physiboss
 	url = https://github.com/thalioo/COVID19.git
 	branch = emews-pbc
+[submodule "CREXDATA System Components/Multi-Modal Data Fusion Toolbox/mmdf-kstreams"]
+    path = CREXDATA System Components/Multi-Modal Data Fusion Toolbox/mmdf-kstreams
+    url = https://github.com/ITSLab-UAegean/mmdf-kstreams.git
+[submodule "CREXDATA System Components/Multi-Modal Data Fusion Toolbox/mmdf-rm-extension"]
+    path = CREXDATA System Components/Multi-Modal Data Fusion Toolbox/mmdf-rm-extension
+    url = https://github.com/ITSLab-UAegean/mmdf-rm-extension.git
