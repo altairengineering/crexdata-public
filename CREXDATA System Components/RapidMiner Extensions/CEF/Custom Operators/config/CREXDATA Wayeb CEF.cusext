@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><root>
+  <name>CREXDATA Wayeb CEF</name>
+  <vendor>CREXDATA project</vendor>
+  <homepage>https://crexdata.eu</homepage>
+  <folder>//cef_wayeb/CustomOperator/CusOp files/</folder>
+  <objects_folder/>
+  <color>255,102,0</color>
+  <version>1.0.0</version>
+  <jars/>
+  <icons/>
+  <calculate_deps>false</calculate_deps>
+  <icon>gearwheels</icon>
+  <hide_processes>true</hide_processes>
+  <ordered_files>StartWayebCef</ordered_files>
+</root>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.5.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.5.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="process_defined_operators:text_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Text Parameter Macro (2)" width="90" x="112" y="136">
+        <parameter key="macro" value="wayeb_path_and_file_name"/>
+        <parameter key="text_type" value="PLAIN"/>
+        <parameter key="template_text" value="Path and File name of the Wayeb Complex Event Forecasting Engine&#10;e.g. wayeb-0.6.0-SNAPSHOT.jar"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:text_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Text Parameter Macro" width="90" x="246" y="136">
+        <parameter key="macro" value="model_path_file_name"/>
+        <parameter key="text_type" value="PLAIN"/>
+        <parameter key="template_text" value="Path and location of Finite State Model (FSM)&#10;e.g.water_level.spst"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:text_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Text Parameter Macro (3)" width="90" x="380" y="136">
+        <parameter key="macro" value="kafkaIn_path_and_file_name"/>
+        <parameter key="text_type" value="PLAIN"/>
+        <parameter key="template_text" value="Path and File name of Kafka Input properties&#10;e.g. kafkaIn.properties"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:text_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Text Parameter Macro (4)" width="90" x="112" y="289">
+        <parameter key="macro" value="kafkaOut_path_and_file_name"/>
+        <parameter key="text_type" value="PLAIN"/>
+        <parameter key="template_text" value="Path and File name of Kafka Output properties file&#10;e.g. kafkaOut.properties"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:text_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Text Parameter Macro (5)" width="90" x="246" y="289">
+        <parameter key="macro" value="statistic_output_location_and_file_name"/>
+        <parameter key="text_type" value="PLAIN"/>
+        <parameter key="template_text" value="Path and File name of Statistics file&#10;e.g. kafka"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:boolean_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Boolean Parameter Macro" width="90" x="380" y="289">
+        <parameter key="macro" value="finalsEnabled"/>
+        <parameter key="value" value="true"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:integer_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Integer Parameter Macro" width="90" x="112" y="442">
+        <parameter key="macro" value="horizon"/>
+        <parameter key="value" value="15"/>
+        <parameter key="min" value="1"/>
+        <parameter key="max" value="9999"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:integer_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Integer Parameter Macro (2)" width="90" x="246" y="442">
+        <parameter key="macro" value="center"/>
+        <parameter key="value" value="3"/>
+        <parameter key="min" value="1"/>
+        <parameter key="max" value="99"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:integer_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Integer Parameter Macro (3)" width="90" x="380" y="442">
+        <parameter key="macro" value="maxSpread"/>
+        <parameter key="value" value="5"/>
+        <parameter key="min" value="1"/>
+        <parameter key="max" value="999"/>
+      </operator>
+      <operator activated="true" class="process_defined_operators:double_parameter_macro" compatibility="2.0.000" expanded="true" height="82" name="Double Parameter Macro" width="90" x="380" y="595">
+        <parameter key="macro" value="threshold"/>
+        <parameter key="value" value="0.5"/>
+        <parameter key="min" value="0.01"/>
+        <parameter key="max" value="1.0"/>
+      </operator>
+      <operator activated="true" class="utility:create_exampleset" compatibility="10.5.000" expanded="true" height="68" name="Create ExampleSet (2)" width="90" x="648" y="136">
+        <parameter key="generator_type" value="comma separated text"/>
+        <parameter key="number_of_examples" value="100"/>
+        <parameter key="use_stepsize" value="false"/>
+        <list key="function_descriptions"/>
+        <parameter key="add_id_attribute" value="false"/>
+        <list key="numeric_series_configuration"/>
+        <list key="date_series_configuration"/>
+        <list key="date_series_configuration (interval)"/>
+        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+        <parameter key="time_zone" value="Europe/Berlin"/>
+        <parameter key="input_csv_text" value="command&#10;java -jar %{wayeb_path_and_file_name} forecasting --fsm:%{model_path_file_name} --modelType:vmm --stream:kafka --kafkaConfIn:%{kafkaIn_path_and_file_name} --domainSpecificStream:forward --statsFile:%{statistic_output_location_and_file_name} --kafkaConfOut:%{kafkaOut_path_and_file_name} --foreMethod:classify-win --horizon:%{horizon} --center:%{center} --maxSpread:%{maxSpread} --threshold:%{threshold} --finalsEnabled:%{finalsEnabled}"/>
+        <parameter key="column_separator" value=","/>
+        <parameter key="parse_all_as_nominal" value="false"/>
+        <parameter key="decimal_point_character" value="."/>
+        <parameter key="trim_attribute_names" value="true"/>
+      </operator>
+      <operator activated="true" class="extract_macro" compatibility="10.5.000" expanded="true" height="68" name="Extract Macro" width="90" x="782" y="136">
+        <parameter key="macro" value="command"/>
+        <parameter key="macro_type" value="data_value"/>
+        <parameter key="statistics" value="average"/>
+        <parameter key="attribute_name" value="command"/>
+        <parameter key="example_index" value="1"/>
+        <list key="additional_macros"/>
+      </operator>
+      <operator activated="true" class="productivity:execute_program" compatibility="10.5.000" expanded="true" height="103" name="Start Wayeb CEF" width="90" x="916" y="136">
+        <parameter key="command" value="%{command}"/>
+        <parameter key="log_stdout" value="true"/>
+        <parameter key="log_stderr" value="true"/>
+        <list key="env_variables"/>
+      </operator>
+      <connect from_op="Text Parameter Macro (2)" from_port="through 1" to_op="Text Parameter Macro" to_port="through 1"/>
+      <connect from_op="Text Parameter Macro" from_port="through 1" to_op="Text Parameter Macro (3)" to_port="through 1"/>
+      <connect from_op="Text Parameter Macro (3)" from_port="through 1" to_op="Text Parameter Macro (4)" to_port="through 1"/>
+      <connect from_op="Text Parameter Macro (4)" from_port="through 1" to_op="Text Parameter Macro (5)" to_port="through 1"/>
+      <connect from_op="Text Parameter Macro (5)" from_port="through 1" to_op="Boolean Parameter Macro" to_port="through 1"/>
+      <connect from_op="Boolean Parameter Macro" from_port="through 1" to_op="Integer Parameter Macro" to_port="through 1"/>
+      <connect from_op="Integer Parameter Macro" from_port="through 1" to_op="Integer Parameter Macro (2)" to_port="through 1"/>
+      <connect from_op="Integer Parameter Macro (2)" from_port="through 1" to_op="Integer Parameter Macro (3)" to_port="through 1"/>
+      <connect from_op="Integer Parameter Macro (3)" from_port="through 1" to_op="Double Parameter Macro" to_port="through 1"/>
+      <connect from_op="Create ExampleSet (2)" from_port="output" to_op="Extract Macro" to_port="example set"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="105" resized="true" width="614" x="221" y="951">java -jar wayeb-0.6.0-SNAPSHOT.jar forecasting --fsm:water_level.spst --modelType:vmm --stream:kafka --kafkaConfIn:kafkaIn.properties --domainSpecificStream:forward --statsFile:kafka --kafkaConfOut:kafkaOut.properties --foreMethod:classify-win --horizon:15 --center:3 --maxSpread:5 --threshold:0.5 --finalsEnabled:true</description>
+      <description align="center" color="yellow" colored="false" height="726" resized="true" width="532" x="51" y="46">Create command line arguments</description>
+      <description align="center" color="orange" colored="true" height="237" resized="true" width="295" x="601" y="48">Create full command</description>
+    </process>
+  </operator>
+  <title>Start Wayeb CEF</title>
+  <icon>gearwheels.png</icon>
+  <description/>
+  <synopsis/>
+  <number-of-inputs>0</number-of-inputs>
+  <number-of-outputs>0</number-of-outputs>
+  <defines-optionals>true</defines-optionals>
+  <param-ordering>true</param-ordering>
+  <gets-random-seed>true</gets-random-seed>
+  <custom-operator-type>standard</custom-operator-type>
+  <template-parameters>
+    <template-parameter>
+      <operator>Text Parameter Macro (2)</operator>
+      <parameter>value</parameter>
+      <alias>path to _wayeb engine</alias>
+      <documentation>The text macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Text Parameter Macro</operator>
+      <parameter>value</parameter>
+      <alias>path to _fsm model</alias>
+      <documentation>The text macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Text Parameter Macro (3)</operator>
+      <parameter>value</parameter>
+      <alias>path to _kafka _input file</alias>
+      <documentation>The text macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Text Parameter Macro (4)</operator>
+      <parameter>value</parameter>
+      <alias>path to _kafka _output file</alias>
+      <documentation>The text macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Text Parameter Macro (5)</operator>
+      <parameter>value</parameter>
+      <alias>path to _statistic _output file</alias>
+      <documentation>The text macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Boolean Parameter Macro</operator>
+      <parameter>value</parameter>
+      <alias>finals_enabled</alias>
+      <documentation>The boolean macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Integer Parameter Macro</operator>
+      <parameter>value</parameter>
+      <alias>horizon of forecasting datapoints</alias>
+      <documentation>The integer macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Integer Parameter Macro (2)</operator>
+      <parameter>value</parameter>
+      <alias>center of forecast window</alias>
+      <documentation>The integer macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Integer Parameter Macro (3)</operator>
+      <parameter>value</parameter>
+      <alias>maximum spread allowed for forecast</alias>
+      <documentation>The integer macro value defined by the user.</documentation>
+    </template-parameter>
+    <template-parameter>
+      <operator>Double Parameter Macro</operator>
+      <parameter>value</parameter>
+      <alias>threshold for minimal probability</alias>
+      <documentation>The double macro value defined by the user.</documentation>
+    </template-parameter>
+  </template-parameters>
+  <tutorials/>
+</process>
