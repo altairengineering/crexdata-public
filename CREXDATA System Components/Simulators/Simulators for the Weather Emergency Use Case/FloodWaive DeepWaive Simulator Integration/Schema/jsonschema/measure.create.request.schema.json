@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeasureCreateRequest (subset)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["name", "geometry"],
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "geometry": {
+      "oneOf": [
+        {
+          "title": "PolygonGeometry",
+          "type": "object",
+          "required": ["type", "coordinates"],
+          "properties": {
+            "type": { "type": "string", "enum": ["Polygon"] },
+            "coordinates": { "type": "array" }
+          },
+          "additionalProperties": true
+        },
+        {
+          "title": "ClearcutGeometry",
+          "type": "object",
+          "required": ["type", "start_point", "end_point", "width"],
+          "properties": {
+            "type": { "type": "string", "enum": ["Clearcut"] },
+            "start_point": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+            "end_point": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+            "width": { "type": "number" },
+            "centerline": { "type": "array" },
+            "depth": { "type": "number" }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "elevation_change": { "type": "number" },
+    "building_removal": { "type": "boolean" },
+    "fill_nodata": { "type": "boolean" },
+    "fill_nodata_mode": { "type": "string", "enum": ["holes_only", "inpaint"] },
+    "anchor_enabled": { "type": "boolean" },
+    "anchor_to": { "type": "string", "enum": ["highest", "lowest"] }
+  }
+}
+

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SimulationGeoTIFFExportRequest (subset)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "filesystem_path": { "type": "string" },
+    "timesteps": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "description": "Use -1 for maximum water levels."
+    },
+    "data_type": { "type": "string", "enum": ["depth", "velocity", "direction"] },
+    "scope": { "type": "string", "enum": ["full_area", "window"] },
+    "bounds": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+    "geometry": { "type": "object" },
+    "resolution": { "type": "integer" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "target_crs": { "type": "string", "description": "Optional CRS for exported GeoTIFF (e.g., EPSG:25832)." }
+  }
+}
+

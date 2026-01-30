@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DownloadUrlResponse",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["download_url"],
+  "properties": {
+    "download_url": { "type": "string", "format": "uri" }
+  }
+}
+

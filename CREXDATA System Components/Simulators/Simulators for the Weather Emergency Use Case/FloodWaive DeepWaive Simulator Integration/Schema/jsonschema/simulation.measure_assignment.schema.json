@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SimulationMeasureAssignment (subset)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["measure_id"],
+  "properties": {
+    "measure_id": { "type": "string" },
+    "parameter_overrides": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "elevation_change": { "type": "number" },
+        "width": { "type": "number" },
+        "anchor_enabled": { "type": "boolean" },
+        "anchor_to": { "type": "string", "enum": ["highest", "lowest"] }
+      }
+    }
+  }
+}
+

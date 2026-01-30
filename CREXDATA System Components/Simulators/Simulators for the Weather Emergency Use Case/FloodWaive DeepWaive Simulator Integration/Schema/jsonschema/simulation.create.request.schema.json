@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SimulationCreateRequest (subset)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["name", "resolution"],
+  "properties": {
+    "name": { "type": "string" },
+    "model_id": { "type": "string" },
+    "resolution": { "type": "integer", "description": "Grid resolution in meters (typical: 1,2,4,8,16)." },
+    "rainfall_event_id": { "type": "string" },
+    "measure_assignments": {
+      "type": "array",
+      "items": { "$ref": "./simulation.measure_assignment.schema.json" }
+    },
+    "measures": { "type": "array", "items": { "type": "string" } },
+    "description": { "type": "string" },
+    "start_time": { "type": "string", "format": "date-time" },
+    "end_time": { "type": "string", "format": "date-time" }
+  }
+}
