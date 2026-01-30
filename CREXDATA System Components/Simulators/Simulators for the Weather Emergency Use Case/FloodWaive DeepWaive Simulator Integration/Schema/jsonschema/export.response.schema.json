@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Export (response subset)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["export_id", "name", "status", "filesystem_path"],
+  "properties": {
+    "export_id": { "type": "string" },
+    "name": { "type": "string" },
+    "status": { "type": "string", "enum": ["pending", "processing", "completed", "failed", "cancelled"] },
+    "filesystem_path": { "type": "string" },
+    "file_count": { "type": "integer" },
+    "total_size_bytes": { "type": "integer" },
+    "progress_percent": { "type": "number" },
+    "error_message": { "type": "string" },
+    "file_progress": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["filename", "status", "progress_percent"],
+        "properties": {
+          "filename": { "type": "string" },
+          "timestep": { "type": "integer" },
+          "status": { "type": "string" },
+          "progress_percent": { "type": "number" },
+          "file_size_bytes": { "type": "integer" },
+          "error_message": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+

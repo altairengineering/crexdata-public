@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RainfallEventCreateRequest (subset)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["name", "rainfall_values"],
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "event_type": { "type": "string" },
+    "source": { "type": "string" },
+    "start_time": { "type": "string", "format": "date-time" },
+    "end_time": { "type": "string", "format": "date-time" },
+    "rainfall_values": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "title": "RainfallValue1D",
+            "type": "object",
+            "required": ["duration", "intensity"],
+            "properties": {
+              "duration": { "type": "integer", "description": "Duration in minutes." },
+              "intensity": { "type": "number", "description": "Intensity in mm/hour." }
+            },
+            "additionalProperties": true
+          },
+          {
+            "title": "RainfallValue2D",
+            "type": "object",
+            "required": ["duration", "band_index"],
+            "properties": {
+              "duration": { "type": "integer", "description": "Duration in seconds." },
+              "band_index": { "type": "integer", "description": "1-based band index in the rainfall stack." },
+              "stack_id": { "type": "string", "description": "Rainfall stack ID (e.g., ars_20250101120000)." }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    }
+  }
+}
+

@@ -1,0 +1,694 @@
+openapi: 3.0.3
+info:
+  title: FloodWaive API (CREXDATA integration subset)
+  version: "1.0"
+  description: |
+    OpenAPI description for the FloodWaive endpoints used in the CREXDATA Weather Emergency integration.
+
+    Conventions:
+    - Field naming is **snake_case**.
+    - Responses may include additional fields; clients should ignore unknown fields.
+
+servers:
+  - url: https://api.floodwaive.de/v1
+
+tags:
+  - name: areas
+  - name: rainfall_events
+  - name: measures
+  - name: simulations
+  - name: exports
+  - name: filesystem
+
+security:
+  - bearerAuth: []
+
+paths:
+  /areas/{area_id}/simulations:
+    post:
+      tags: [areas, simulations]
+      summary: Create simulation for area
+      parameters:
+        - $ref: "#/components/parameters/area_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulationCreateRequest"
+      responses:
+        "200":
+          description: Simulation created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    get:
+      tags: [areas, simulations]
+      summary: List simulations for area
+      parameters:
+        - $ref: "#/components/parameters/area_id"
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+            default: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        "200":
+          description: Paginated simulation list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationsPaginatedResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /areas/{area_id}/rainfall-events:
+    post:
+      tags: [areas, rainfall_events]
+      summary: Create rainfall event for area
+      parameters:
+        - $ref: "#/components/parameters/area_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RainfallEventCreateRequest"
+      responses:
+        "200":
+          description: Rainfall event created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RainfallEventResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    get:
+      tags: [areas, rainfall_events]
+      summary: List rainfall events for area
+      parameters:
+        - $ref: "#/components/parameters/area_id"
+      responses:
+        "200":
+          description: Rainfall events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RainfallEventResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /areas/{area_id}/measures:
+    post:
+      tags: [areas, measures]
+      summary: Create measure for area
+      parameters:
+        - $ref: "#/components/parameters/area_id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MeasureCreateRequest"
+      responses:
+        "200":
+          description: Measure created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasureResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    get:
+      tags: [areas, measures]
+      summary: List measures for area
+      parameters:
+        - $ref: "#/components/parameters/area_id"
+      responses:
+        "200":
+          description: Measures
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeasureResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /simulations/{simulation_id}:
+    get:
+      tags: [simulations]
+      summary: Get simulation details
+      parameters:
+        - $ref: "#/components/parameters/simulation_id"
+      responses:
+        "200":
+          description: Simulation details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /simulations/{simulation_id}/export-geotiff:
+    post:
+      tags: [simulations, exports]
+      summary: Export simulation results as GeoTIFF
+      description: |
+        Creates an export job for one or more timesteps.
+
+        Special values:
+        - `timesteps: [-1]` exports **maximum water levels** (where supported).
+      parameters:
+        - $ref: "#/components/parameters/simulation_id"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulationGeoTIFFExportRequest"
+      responses:
+        "200":
+          description: Export created (poll via /exports/{export_id})
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Export"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /exports/{export_id}:
+    get:
+      tags: [exports]
+      summary: Get export status/details
+      parameters:
+        - $ref: "#/components/parameters/export_id"
+      responses:
+        "200":
+          description: Export details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Export"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /filesystem/download/{file_path}:
+    get:
+      tags: [filesystem]
+      summary: Get a short-lived download URL for a file in the organization filesystem
+      description: |
+        Returns a short-lived URL for downloading a file.
+
+        The `{file_path}` parameter is a greedy path parameter (it may contain slashes).
+        When constructing URLs manually, ensure proper URL encoding (spaces, special characters).
+      parameters:
+        - name: file_path
+          in: path
+          required: true
+          schema:
+            type: string
+          description: |
+            File path as returned by export responses (`filesystem_path` + `filename`). A leading `/` is optional.
+      responses:
+        "200":
+          description: Download URL response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DownloadUrlResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: "Send `Authorization: Bearer $FLOODWAIVE_API_KEY`"
+
+  parameters:
+    area_id:
+      name: area_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Area identifier (e.g., `area_20250101120000`)
+    simulation_id:
+      name: simulation_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Simulation identifier (e.g., `simulation-550e8400-e29b-41d4-a716-446655440000`)
+    export_id:
+      name: export_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Export identifier
+
+  responses:
+    Unauthorized:
+      description: Unauthorized (missing/invalid token)
+    Forbidden:
+      description: Forbidden (insufficient permissions)
+    NotFound:
+      description: Resource not found
+
+  schemas:
+    # --- Simulations ---
+    SimulationCreateRequest:
+      type: object
+      additionalProperties: true
+      required: [name, resolution]
+      properties:
+        name:
+          type: string
+        model_id:
+          type: string
+          description: Optional model selector (default depends on server configuration).
+        resolution:
+          type: integer
+          description: "Grid resolution in meters (typical: 1, 2, 4, 8, 16)."
+        rainfall_event_id:
+          type: string
+          description: Optional Rainfall Event ID (when rainfall is used).
+        measure_assignments:
+          type: array
+          items:
+            $ref: "#/components/schemas/SimulationMeasureAssignment"
+        measures:
+          type: array
+          items:
+            type: string
+          description: Legacy list of measure IDs (backward compatibility).
+        description:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+
+    SimulationProgress:
+      type: object
+      additionalProperties: true
+      properties:
+        status:
+          type: string
+          description: Simulation status (e.g., QUEUED, RUNNING, COMPLETE, ERROR).
+        overall_progress:
+          type: number
+          format: float
+        current_step:
+          type: string
+        available_timesteps:
+          type: array
+          items:
+            type: integer
+
+    SimulationResponse:
+      allOf:
+        - $ref: "#/components/schemas/SimulationCreateRequest"
+        - type: object
+          additionalProperties: true
+          required: [simulation_id, area_id, created_at, progress]
+          properties:
+            simulation_id:
+              type: string
+            area_id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            created_by:
+              type: string
+            created_by_name:
+              type: string
+            progress:
+              $ref: "#/components/schemas/SimulationProgress"
+
+    SimulationsPaginatedResponse:
+      type: object
+      additionalProperties: true
+      required: [simulations, total_count, has_more, offset]
+      properties:
+        simulations:
+          type: array
+          items:
+            $ref: "#/components/schemas/SimulationResponse"
+        total_count:
+          type: integer
+        has_more:
+          type: boolean
+        offset:
+          type: integer
+        limit:
+          type: integer
+
+    # --- Rainfall events ---
+    RainfallValue1D:
+      type: object
+      required: [duration, intensity]
+      properties:
+        duration:
+          type: integer
+          description: Duration in minutes.
+        intensity:
+          type: number
+          format: float
+          description: Intensity in mm/hour.
+
+    RainfallValue2D:
+      type: object
+      required: [duration, band_index]
+      properties:
+        duration:
+          type: integer
+          description: Duration in seconds.
+        band_index:
+          type: integer
+          description: 1-based band index in the rainfall stack.
+        stack_id:
+          type: string
+          description: Rainfall stack ID (e.g., `ars_20250101120000`).
+
+    RainfallEventCreateRequest:
+      type: object
+      additionalProperties: true
+      required: [name, rainfall_values]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        event_type:
+          type: string
+          description: Event type (e.g., custom, historical, design, forecast, precalculated).
+        source:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        rainfall_values:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/RainfallValue1D"
+              - $ref: "#/components/schemas/RainfallValue2D"
+
+    RainfallEventResponse:
+      allOf:
+        - $ref: "#/components/schemas/RainfallEventCreateRequest"
+        - type: object
+          additionalProperties: true
+          required: [rainfall_event_id, created_at, area_id]
+          properties:
+            rainfall_event_id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            area_id:
+              type: string
+            created_by_name:
+              type: string
+
+    # --- Measures ---
+    PolygonGeometry:
+      type: object
+      required: [type, coordinates]
+      properties:
+        type:
+          type: string
+          enum: [Polygon]
+        coordinates:
+          type: array
+          description: GeoJSON Polygon coordinates in EPSG:4326.
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+
+    ClearcutGeometry:
+      type: object
+      required: [type, start_point, end_point, width]
+      properties:
+        type:
+          type: string
+          enum: [Clearcut]
+        start_point:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: number
+          description: EPSG:4326 [lon, lat]
+        end_point:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: number
+        width:
+          type: number
+          format: float
+          description: Width in meters.
+        centerline:
+          type: array
+          items:
+            type: array
+            minItems: 2
+            maxItems: 2
+            items:
+              type: number
+        depth:
+          type: number
+          format: float
+
+    MeasureCreateRequest:
+      type: object
+      additionalProperties: true
+      required: [name, geometry]
+      properties:
+        name:
+          type: string
+        geometry:
+          oneOf:
+            - $ref: "#/components/schemas/PolygonGeometry"
+            - $ref: "#/components/schemas/ClearcutGeometry"
+        elevation_change:
+          type: number
+          format: float
+        building_removal:
+          type: boolean
+        fill_nodata:
+          type: boolean
+        fill_nodata_mode:
+          type: string
+          enum: [holes_only, inpaint]
+        anchor_enabled:
+          type: boolean
+        anchor_to:
+          type: string
+          enum: [highest, lowest]
+        description:
+          type: string
+
+    MeasureResponse:
+      allOf:
+        - $ref: "#/components/schemas/MeasureCreateRequest"
+        - type: object
+          additionalProperties: true
+          required: [measure_id]
+          properties:
+            measure_id:
+              type: string
+            area_id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            created_by_name:
+              type: string
+
+    MeasureParameterOverrides:
+      type: object
+      additionalProperties: true
+      properties:
+        elevation_change:
+          type: number
+          format: float
+        width:
+          type: number
+          format: float
+        anchor_enabled:
+          type: boolean
+        anchor_to:
+          type: string
+          enum: [highest, lowest]
+
+    SimulationMeasureAssignment:
+      type: object
+      required: [measure_id]
+      properties:
+        measure_id:
+          type: string
+        parameter_overrides:
+          $ref: "#/components/schemas/MeasureParameterOverrides"
+
+    # --- Exports ---
+    SimulationGeoTIFFExportRequest:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        filesystem_path:
+          type: string
+          description: Destination folder path in organization filesystem.
+        timesteps:
+          type: array
+          items:
+            type: integer
+          description: Use -1 for maximum water levels.
+        data_type:
+          type: string
+          enum: [depth, velocity, direction]
+        scope:
+          type: string
+          enum: [full_area, window]
+        bounds:
+          type: array
+          minItems: 4
+          maxItems: 4
+          items:
+            type: number
+        geometry:
+          type: object
+          description: Optional GeoJSON polygon to clip export.
+        resolution:
+          type: integer
+        tags:
+          type: array
+          items:
+            type: string
+        target_crs:
+          type: string
+          description: Optional CRS for exported GeoTIFF (e.g., EPSG:25832).
+
+    ExportFileProgress:
+      type: object
+      additionalProperties: true
+      required: [filename, status, progress_percent]
+      properties:
+        filename:
+          type: string
+        timestep:
+          type: integer
+        status:
+          type: string
+          description: pending | processing | assembling | completed | failed | cancelled
+        progress_percent:
+          type: number
+          format: float
+        file_size_bytes:
+          type: integer
+        error_message:
+          type: string
+
+    Export:
+      type: object
+      additionalProperties: true
+      required: [export_id, name, status, filesystem_path]
+      properties:
+        export_id:
+          type: string
+        name:
+          type: string
+        export_type:
+          type: string
+        export_format:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          description: pending | processing | completed | failed | cancelled
+        filesystem_path:
+          type: string
+        file_count:
+          type: integer
+        total_size_bytes:
+          type: integer
+        progress_percent:
+          type: number
+          format: float
+        file_progress:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExportFileProgress"
+        error_message:
+          type: string
+
+    DownloadUrlResponse:
+      type: object
+      required: [download_url]
+      properties:
+        download_url:
+          type: string
+          format: uri
