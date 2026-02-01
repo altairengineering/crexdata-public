@@ -130,6 +130,13 @@
 
             </group>
             <group key="TUC">
+                        <group key="Nerfs">
+                            <operator>
+                                <key>Nerf Training</key>
+                                <class>com.rapidminer.extension.streaming.operator.tuc.NerfTraining</class>
+                                <icon>lightbulb_on.png</icon>
+                            </operator>
+                        </group>
                         <group key="Augmented Reality">
                             <operator>
                                 <key>KNN Mental Fatigue</key>
