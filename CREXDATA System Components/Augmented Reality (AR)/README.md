@@ -7,6 +7,7 @@ This repository folder contains the source code of the system components for Aug
 - Augmented Reality Components for Flood Visualization and Server (by TUC) for the Weather Emergency Use Case
 - Augmented Reality Components for Firefighters (by TUC) for the Wildfire Use Case
 - Mental Fatigue Eye Tracking Prediction System (by TUC) for Firefighters and Emergency Team Members
+- Augmented Reality (AR) Visualization for the Maritime Use Case
 
 The README files in the above folders describe the system components, their integration, and their use in more detail.
 
