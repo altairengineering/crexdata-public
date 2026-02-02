@@ -1,6 +1,6 @@
 # crexdata-public / CREXDATA System Components / Complex Event Forecasting (CEF) / README
 
-This is the README file of the source code repository of the system Complex Event Forecasting (CEF) components of the CREXDATA project (https://crexdata.eu/).
+This is the README file of the source code repository of the Complex Event Forecasting (CEF) system components of the CREXDATA project (https://crexdata.eu/).
 
 This repository folder has one subfolder per system component within the folder Complex Event Forecasting (CEF):
 
