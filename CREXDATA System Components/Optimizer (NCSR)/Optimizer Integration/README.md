@@ -1,4 +1,4 @@
-# crexdata-public / CREXDATA System Components / Optimizer (NCSR) / Optinizer Integration / README
+# crexdata-public / CREXDATA System Components / Optimizer (NCSR) / Optimizer Integration / README
 
 This is the README file of the source code repository of the RapidMiner Extension (developed by Altair RapidMiner) to integrate the Optimizer developed by NCSR into the CREXDATA platform developed within the CREXDATA project (https://crexdata.eu/).
 
@@ -14,7 +14,7 @@ This subfolder contains the source code of the RapidMiner Extension (JAR file) f
 
 # Integration
 
-This subfolder contains the integration artefacts for integrating the NCSR Optimizer into the CREXDATA system, i.e. into RapidMiner AI Hub, i.e. the REST web service endpoint definitions and underlying RapidMiner processes (RMP files), connection objects, etc.
+This subfolder contains the integration artefacts for integrating the NCSR Optimizer into the CREXDATA system, i.e. into RapidMiner AI Hub, i.e. the REST web service endpoint definitions (for RapidMiner AI Hub) and the underlying RapidMiner processes (RMP files), connection objects, etc.
 
 ---
 
