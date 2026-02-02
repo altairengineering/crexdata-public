@@ -18,6 +18,12 @@ This subfolder contains the source code of the CEF/RTCEF system component of the
 
 ---
 
+## Run-Time Event Calculus (RTEC) for Reasoning on Data Streams
+
+This subfolder contains the source code of the CEF/RTEC system component of the CREXDATA System
+
+---
+
 The README files in the above folders describe the system components, their integration, and their use in more detail.
 
 ---
