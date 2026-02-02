@@ -24,6 +24,12 @@ This subfolder contains the source code of the CEF/RTEC system component of the 
 
 ---
 
+## Wayeb Complex Event Processing and Forecasting (CEP/F) Engine
+
+This subfolder contains the source code of Wayeb, a Complex Event Processing and Forecasting (CEP/F) engine written in Scala, which is based on symbolic automata and full- or variable-order Markov models.
+
+---
+
 The README files in the above folders describe the system components, their integration, and their use in more detail.
 
 ---
