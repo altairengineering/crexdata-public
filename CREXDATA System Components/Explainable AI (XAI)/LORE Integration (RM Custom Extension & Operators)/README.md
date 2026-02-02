@@ -1,6 +1,6 @@
 # crexdata-public / CREXDATA System Components / Explainable AI (XAI) / LORE Integration (RM Custom Extension & Operators) / README
 
-This is the README file of the source code repository of the eXplainable Artificial Intelligence (XAI) system component of the CREXDATA project (https://crexdata.eu/), i.e. the data processing workflows (RapidMiner processes), custom RapidMiner operator specifications, and custom RapidMiner extension (JAR file).
+This is the README file of the source code repository of the eXplainable Artificial Intelligence (XAI) system component of the CREXDATA project (https://crexdata.eu/), i.e. the data processing workflows (RapidMiner processes (RMP files)), custom RapidMiner operator specifications (CUSOP files), and custom RapidMiner extension (JAR file).
 
 ---
 
