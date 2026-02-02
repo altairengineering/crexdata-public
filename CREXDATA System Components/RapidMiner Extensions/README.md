@@ -8,15 +8,15 @@ This repository folder contains the following subfolders, one for each RapidMine
 
 ---
 
-# CEF: RapidMiner Extension for integrating the Complex Event Forecasting (CEF) component of the CREXDATA system
+## CEF: RapidMiner Extension for integrating the Complex Event Forecasting (CEF) component of the CREXDATA system
 
 ---
 
-# Collision Avoidance: RapidMiner Extension for integrating the Collision Avoidance component of the CREXDATA system
+## Collision Avoidance: RapidMiner Extension for integrating the Collision Avoidance component of the CREXDATA system
 
 ---
 
-# Data Integration Extensions: RapidMiner Extensions for integrating CRXDATA data source systems
+## Data Integration Extensions: RapidMiner Extensions for integrating CRXDATA data source systems
 
 - RapidMiner Extension for DRZ Drone Data Integration
 - RapidMiner Extension for FMI Wave Height Forecasts 
@@ -25,11 +25,11 @@ This repository folder contains the following subfolders, one for each RapidMine
 
 ---
 
-# FloodWaive: RapidMiner Extension for integrating the FloodWaive DeepWaive flood simulator
+## FloodWaive: RapidMiner Extension for integrating the FloodWaive DeepWaive flood simulator
 
 ---
 
-# NCSR Optimizer: RapidMiner Extension for integrating the NCSR Optimizer
+## NCSR Optimizer: RapidMiner Extension for integrating the NCSR Optimizer
 
 ---
 ---
@@ -43,7 +43,7 @@ https://marketplace.rapidminer.com/
 ---
 ---
 
-## How to download and use RapidMiner AI Studio and RapidMiner Extensions
+# How to download and use RapidMiner AI Studio and RapidMiner Extensions
 
 The following tutorial document describes how to download and install RapidMiner and how to use RapidMiner extensions as well as links to further learning and information sources.
 https://github.com/altairengineering/crexdata-public/blob/main/CREXDATA%20System%20Components/RapidMiner%20Extensions/Altair_RapidMiner_AI_Studio_Introduction_2025-09-30.pdf
