@@ -20,6 +20,7 @@ This subfolder contains the integration artefacts for integrating the NCSR Optim
 ---
 
 The following tutorial document describes how to download and install RapidMiner and how to use RapidMiner extensions as well as links to further learning and information sources.
+https://github.com/altairengineering/crexdata-public/blob/main/CREXDATA%20System%20Components/RapidMiner%20Extensions/Altair_RapidMiner_AI_Studio_Introduction_2025-09-30.pdf
 
 ---
 
