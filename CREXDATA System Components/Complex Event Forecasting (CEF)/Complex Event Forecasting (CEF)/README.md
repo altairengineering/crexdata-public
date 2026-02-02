@@ -6,9 +6,15 @@ This repository folder has one subfolder per system component:
 
 ---
 
-## ETSC = Early Time Series Classification
+## Early Time Series Classification (ETSC)
 
-This folder contains the source code of the CEF/ETSC system component of the CREXDATA System.
+This subfolder contains the source code of the CEF/ETSC system component of the CREXDATA System.
+
+---
+
+## Run-Time Optimisation for Complex Event Forecasting (RTCEF)
+
+This subfolder contains the source code of the CEF/RTCEF system component of the CREXDATA System.
 
 ---
 
