@@ -17,6 +17,11 @@ This subfolder contains the source code of the RapidMiner Extension (JAR file) f
 This subfolder contains the integration artefacts for integrating the NCSR Optimizer into the CREXDATA system, i.e. into RapidMiner AI Hub, i.e. the REST web service endpoint definitions (for RapidMiner AI Hub) and the underlying RapidMiner processes (RMP files), connection objects, etc.
 
 ---
+---
+
+The following tutorial document describes how to download and install RapidMiner and how to use RapidMiner extensions as well as links to further learning and information sources.
+
+---
 
 # License information
 
